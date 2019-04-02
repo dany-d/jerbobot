@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{56063BB0-C8F3-45B9-803F-731089E77162}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="coord2trajec.c" />
+    <ClCompile Include="examples\src\rc_altitude.c" />
+    <ClCompile Include="examples\src\rc_balance.c" />
+    <ClCompile Include="examples\src\rc_benchmark_algebra.c" />
+    <ClCompile Include="examples\src\rc_bind_dsm.c" />
+    <ClCompile Include="examples\src\rc_blink.c" />
+    <ClCompile Include="examples\src\rc_calibrate_accel.c" />
+    <ClCompile Include="examples\src\rc_calibrate_dsm.c" />
+    <ClCompile Include="examples\src\rc_calibrate_escs.c" />
+    <ClCompile Include="examples\src\rc_calibrate_gyro.c" />
+    <ClCompile Include="examples\src\rc_calibrate_mag.c" />
+    <ClCompile Include="examples\src\rc_check_battery.c" />
+    <ClCompile Include="examples\src\rc_cpu.c" />
+    <ClCompile Include="examples\src\rc_dsm_passthrough.c" />
+    <ClCompile Include="examples\src\rc_kill.c" />
+    <ClCompile Include="examples\src\rc_model.c" />
+    <ClCompile Include="examples\src\rc_spi_loopback.c" />
+    <ClCompile Include="examples\src\rc_test_adc.c" />
+    <ClCompile Include="examples\src\rc_test_algebra.c" />
+    <ClCompile Include="examples\src\rc_test_bmp.c" />
+    <ClCompile Include="examples\src\rc_test_buttons.c" />
+    <ClCompile Include="examples\src\rc_test_complementary_filters.c" />
+    <ClCompile Include="examples\src\rc_test_dmp.c" />
+    <ClCompile Include="examples\src\rc_test_dmp_tap.c" />
+    <ClCompile Include="examples\src\rc_test_drivers.c" />
+    <ClCompile Include="examples\src\rc_test_dsm.c" />
+    <ClCompile Include="examples\src\rc_test_encoders.c" />
+    <ClCompile Include="examples\src\rc_test_encoders_eqep.c" />
+    <ClCompile Include="examples\src\rc_test_encoders_pru.c" />
+    <ClCompile Include="examples\src\rc_test_escs.c" />
+    <ClCompile Include="examples\src\rc_test_filters.c" />
+    <ClCompile Include="examples\src\rc_test_kalman.c" />
+    <ClCompile Include="examples\src\rc_test_leds.c" />
+    <ClCompile Include="examples\src\rc_test_matrix.c" />
+    <ClCompile Include="examples\src\rc_test_mavlink.c" />
+    <ClCompile Include="examples\src\rc_test_motors.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_mpu.c" />
+    <ClCompile Include="examples\src\rc_test_polynomial.c" />
+    <ClCompile Include="examples\src\rc_test_pthread.c" />
+    <ClCompile Include="examples\src\rc_test_servos.c" />
+    <ClCompile Include="examples\src\rc_test_time.c" />
+    <ClCompile Include="examples\src\rc_test_vector.c" />
+    <ClCompile Include="examples\src\rc_uart_loopback.c" />
+    <ClCompile Include="examples\src\rc_version.c" />
+    <ClCompile Include="jb_test_odom.c" />
+    <ClCompile Include="library\src\bmp\bmp.c" />
+    <ClCompile Include="library\src\button.c" />
+    <ClCompile Include="library\src\cpu.c" />
+    <ClCompile Include="library\src\deprecated.c" />
+    <ClCompile Include="library\src\dsm.c" />
+    <ClCompile Include="library\src\encoder.c" />
+    <ClCompile Include="library\src\io\adc.c" />
+    <ClCompile Include="library\src\io\encoder_eqep.c" />
+    <ClCompile Include="library\src\io\gpio.c" />
+    <ClCompile Include="library\src\io\i2c.c" />
+    <ClCompile Include="library\src\io\pwm.c" />
+    <ClCompile Include="library\src\io\spi.c" />
+    <ClCompile Include="library\src\io\uart.c" />
+    <ClCompile Include="library\src\led.c" />
+    <ClCompile Include="library\src\math\algebra.c" />
+    <ClCompile Include="library\src\math\algebra_common.c" />
+    <ClCompile Include="library\src\math\filter.c" />
+    <ClCompile Include="library\src\math\kalman.c" />
+    <ClCompile Include="library\src\math\matrix.c" />
+    <ClCompile Include="library\src\math\other.c" />
+    <ClCompile Include="library\src\math\polynomial.c" />
+    <ClCompile Include="library\src\math\quaternion.c" />
+    <ClCompile Include="library\src\math\ring_buffer.c" />
+    <ClCompile Include="library\src\math\vector.c" />
+    <ClCompile Include="library\src\mavlink_udp.c" />
+    <ClCompile Include="library\src\model.c" />
+    <ClCompile Include="library\src\motor.c" />
+    <ClCompile Include="library\src\mpu\mpu.c" />
+    <ClCompile Include="library\src\pinmux.c" />
+    <ClCompile Include="library\src\pru\encoder_pru.c" />
+    <ClCompile Include="library\src\pru\pru.c" />
+    <ClCompile Include="library\src\pru\servo.c" />
+    <ClCompile Include="library\src\pthread.c" />
+    <ClCompile Include="library\src\start_stop.c" />
+    <ClCompile Include="library\src\time.c" />
+    <ClCompile Include="library\src\version.c" />
+    <ClCompile Include="odom.c" />
+    <ClCompile Include="pru_firmware\src\main_pru0.c" />
+    <ClCompile Include="pru_firmware\src\main_pru1.c" />
+    <ClCompile Include="rc_project_template.c" />
+    <ClCompile Include="services\rc_battery_monitor\src\rc_battery_monitor.c" />
+    <ClCompile Include="services\robotcontrol\src\rc_startup_routine.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\src\footer.html" />
+    <None Include="docs\src\header.html" />
+    <None Include="pru_firmware\src\pru0-encoder.asm" />
+    <None Include="pru_firmware\src\pru1-servo.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="coord2trajec.h" />
+    <ClInclude Include="examples\src\rc_balance_defs.h" />
+    <ClInclude Include="library\include\rc\adc.h" />
+    <ClInclude Include="library\include\rc\bmp.h" />
+    <ClInclude Include="library\include\rc\button.h" />
+    <ClInclude Include="library\include\rc\cpu.h" />
+    <ClInclude Include="library\include\rc\deprecated.h" />
+    <ClInclude Include="library\include\rc\dsm.h" />
+    <ClInclude Include="library\include\rc\encoder.h" />
+    <ClInclude Include="library\include\rc\encoder_eqep.h" />
+    <ClInclude Include="library\include\rc\encoder_pru.h" />
+    <ClInclude Include="library\include\rc\gpio.h" />
+    <ClInclude Include="library\include\rc\i2c.h" />
+    <ClInclude Include="library\include\rc\led.h" />
+    <ClInclude Include="library\include\rc\math.h" />
+    <ClInclude Include="library\include\rc\math\algebra.h" />
+    <ClInclude Include="library\include\rc\math\filter.h" />
+    <ClInclude Include="library\include\rc\math\kalman.h" />
+    <ClInclude Include="library\include\rc\math\matrix.h" />
+    <ClInclude Include="library\include\rc\math\other.h" />
+    <ClInclude Include="library\include\rc\math\polynomial.h" />
+    <ClInclude Include="library\include\rc\math\quaternion.h" />
+    <ClInclude Include="library\include\rc\math\ring_buffer.h" />
+    <ClInclude Include="library\include\rc\math\vector.h" />
+    <ClInclude Include="library\include\rc\mavlink\checksum.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\common.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_actuator_control_target.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_adsb_vehicle.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_altitude.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_attitude.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_attitude_quaternion.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_attitude_quaternion_cov.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_attitude_target.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_att_pos_mocap.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_auth_key.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_autopilot_version.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_battery_status.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_button_change.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_camera_capture_status.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_camera_image_captured.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_camera_information.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_camera_settings.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_camera_trigger.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_change_operator_control.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_change_operator_control_ack.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_collision.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_command_ack.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_command_int.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_command_long.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_control_system_state.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_data_stream.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_data_transmission_handshake.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_debug.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_debug_vect.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_distance_sensor.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_encapsulated_data.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_estimator_status.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_extended_sys_state.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_file_transfer_protocol.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_flight_information.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_follow_target.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_global_position_int.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_global_position_int_cov.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_global_vision_position_estimate.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps2_raw.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps2_rtk.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps_global_origin.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps_inject_data.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps_input.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps_raw_int.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps_rtcm_data.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps_rtk.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps_status.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_heartbeat.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_highres_imu.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_high_latency.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_actuator_controls.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_controls.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_gps.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_optical_flow.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_rc_inputs_raw.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_sensor.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_state.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_state_quaternion.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_home_position.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_landing_target.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_local_position_ned.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_local_position_ned_cov.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_local_position_ned_system_global_offset.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_logging_ack.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_logging_data.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_logging_data_acked.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_log_data.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_log_entry.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_log_erase.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_log_request_data.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_log_request_end.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_log_request_list.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_manual_control.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_manual_setpoint.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_memory_vect.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_message_interval.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_ack.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_clear_all.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_count.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_current.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_item.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_item_int.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_item_reached.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_request.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_request_int.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_request_list.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_request_partial_list.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_set_current.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_write_partial_list.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mount_orientation.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_named_value_float.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_named_value_int.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_nav_controller_output.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_obstacle_distance.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_optical_flow.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_optical_flow_rad.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_ext_ack.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_ext_request_list.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_ext_request_read.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_ext_set.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_ext_value.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_map_rc.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_request_list.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_request_read.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_set.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_value.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_ping.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_play_tune.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_position_target_global_int.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_position_target_local_ned.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_power_status.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_protocol_version.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_radio_status.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_raw_imu.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_raw_pressure.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_rc_channels.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_rc_channels_override.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_rc_channels_raw.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_rc_channels_scaled.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_request_data_stream.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_resource_request.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_safety_allowed_area.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_safety_set_allowed_area.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_scaled_imu.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_scaled_imu2.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_scaled_imu3.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_scaled_pressure.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_scaled_pressure2.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_scaled_pressure3.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_serial_control.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_servo_output_raw.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_setup_signing.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_actuator_control_target.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_attitude_target.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_gps_global_origin.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_home_position.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_mode.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_position_target_global_int.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_position_target_local_ned.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_video_stream_settings.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_sim_state.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_statustext.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_storage_information.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_system_time.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_sys_status.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_terrain_check.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_terrain_data.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_terrain_report.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_terrain_request.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_timesync.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_uavcan_node_info.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_uavcan_node_status.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_v2_extension.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_vfr_hud.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_vibration.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_vicon_position_estimate.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_video_stream_information.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_vision_position_estimate.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_vision_speed_estimate.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_wifi_config_ap.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_wind_cov.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\testsuite.h" />
+    <ClInclude Include="library\include\rc\mavlink\common\version.h" />
+    <ClInclude Include="library\include\rc\mavlink\mavlink_conversions.h" />
+    <ClInclude Include="library\include\rc\mavlink\mavlink_get_info.h" />
+    <ClInclude Include="library\include\rc\mavlink\mavlink_helpers.h" />
+    <ClInclude Include="library\include\rc\mavlink\mavlink_sha256.h" />
+    <ClInclude Include="library\include\rc\mavlink\mavlink_types.h" />
+    <ClInclude Include="library\include\rc\mavlink\protocol.h" />
+    <ClInclude Include="library\include\rc\mavlink_udp.h" />
+    <ClInclude Include="library\include\rc\mavlink_udp_helpers.h" />
+    <ClInclude Include="library\include\rc\model.h" />
+    <ClInclude Include="library\include\rc\motor.h" />
+    <ClInclude Include="library\include\rc\mpu.h" />
+    <ClInclude Include="library\include\rc\pinmux.h" />
+    <ClInclude Include="library\include\rc\pru.h" />
+    <ClInclude Include="library\include\rc\pthread.h" />
+    <ClInclude Include="library\include\rc\pwm.h" />
+    <ClInclude Include="library\include\rc\servo.h" />
+    <ClInclude Include="library\include\rc\spi.h" />
+    <ClInclude Include="library\include\rc\start_stop.h" />
+    <ClInclude Include="library\include\rc\time.h" />
+    <ClInclude Include="library\include\rc\uart.h" />
+    <ClInclude Include="library\include\rc\version.h" />
+    <ClInclude Include="library\include\rc_usefulincludes.h" />
+    <ClInclude Include="library\include\robotcontrol.h" />
+    <ClInclude Include="library\include\roboticscape.h" />
+    <ClInclude Include="library\src\bmp\bmp_defs.h" />
+    <ClInclude Include="library\src\common.h" />
+    <ClInclude Include="library\src\math\algebra_common.h" />
+    <ClInclude Include="library\src\mpu\dmpKey.h" />
+    <ClInclude Include="library\src\mpu\dmpmap.h" />
+    <ClInclude Include="library\src\mpu\dmp_firmware.h" />
+    <ClInclude Include="library\src\mpu\mpu_defs.h" />
+    <ClInclude Include="pru_firmware\src\resource_table_pru1.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

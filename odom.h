@@ -1,20 +1,29 @@
-// JerboBot Odometry Module
-// Taylor Sun (taysun@umich.edu)
-// Last updated: 3/21/19
+/**
+* JerboBot Odometry
+* Taylor Sun (taysun@umich.edu)
+* Last updated: 3/27/19
+*
+* convert stored trajectory to 
+* moving strategy for robot
+*/
 
-// Convert cartesian direction vector to
-// command for four omni-wheels
+#include <math.h>
+#include <vector.h>
 
-get_pos_expec
-// based on current time, get expected position, then output result to PID
-// Define direction vector in cartesian
+// REQ: 
+// MOD:	
+// EFFECT:	set operation mode, PID vs simple
+void run_mode(int mode) { }
 
+// REQ: valid trajectory input
+// MOD:	command motors in simple strategy
+// EFFECT:	operate in simple strategy, ramp up & down
+void mode_simple(rc_vector_trajec *coord_omni) { }
 
+// REQ: valid trajectory input
+// MOD:	command motors in PID strategy
+// EFFECT:	operate in PID strategy
+void mode_pid() { }
 
-
-// REQ: Movement command within field limits
-// MOD:	Write to omni-wheel, rotated coords
-// EFFECT:	Convert cartesian coords to rotated 45
-//			coords, relevant to omni-wheels
-void coord_convert(const int* coord_dif, int *coord_omni) { }
-
+// prior to continuing with movement, check if have rotated 
+void rot_correct() { }

@@ -15,15 +15,943 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="coord2trajec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="odom.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rc_project_template.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="examples\src\rc_altitude.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_balance.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_benchmark_algebra.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_bind_dsm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_blink.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_calibrate_accel.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_calibrate_dsm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_calibrate_escs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_calibrate_gyro.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_calibrate_mag.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_check_battery.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_cpu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_dsm_passthrough.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_kill.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_model.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_spi_loopback.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_adc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_algebra.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_bmp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_buttons.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_complementary_filters.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_dmp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_dmp_tap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_drivers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_dsm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_encoders.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_encoders_eqep.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_encoders_pru.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_escs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_filters.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_kalman.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_leds.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_mavlink.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_motors.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_mpu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_polynomial.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_pthread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_servos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_time.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_test_vector.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_uart_loopback.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\src\rc_version.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\button.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\cpu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\deprecated.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\dsm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\encoder.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\led.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\mavlink_udp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\model.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\motor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\pinmux.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\pthread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\start_stop.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\time.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\version.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\bmp\bmp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\io\adc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\io\encoder_eqep.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\io\gpio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\io\i2c.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\io\pwm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\io\spi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\io\uart.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\math\algebra.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\math\algebra_common.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\math\filter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\math\kalman.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\math\matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\math\other.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\math\polynomial.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\math\quaternion.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\math\ring_buffer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\math\vector.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\mpu\mpu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\pru\encoder_pru.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\pru\pru.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="library\src\pru\servo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pru_firmware\src\main_pru0.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pru_firmware\src\main_pru1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="services\rc_battery_monitor\src\rc_battery_monitor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="services\robotcontrol\src\rc_startup_routine.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="jb_test_odom.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="odom.h">
+    <None Include="pru_firmware\src\pru0-encoder.asm">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="pru_firmware\src\pru1-servo.asm">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="docs\src\footer.html" />
+    <None Include="docs\src\header.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="coord2trajec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="examples\src\rc_balance_defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc_usefulincludes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\robotcontrol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\roboticscape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\adc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\bmp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\cpu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\deprecated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\dsm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\encoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\encoder_eqep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\encoder_pru.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\gpio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\i2c.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\led.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink_udp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink_udp_helpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\motor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mpu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\pinmux.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\pru.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\pthread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\pwm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\servo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\spi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\start_stop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\uart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\math\algebra.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\math\filter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\math\kalman.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\math\matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\math\other.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\math\polynomial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\math\quaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\math\ring_buffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\math\vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\checksum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\mavlink_conversions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\mavlink_get_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\mavlink_helpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\mavlink_sha256.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\mavlink_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\protocol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_actuator_control_target.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_adsb_vehicle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_altitude.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_attitude.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_attitude_quaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_attitude_quaternion_cov.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_attitude_target.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_att_pos_mocap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_auth_key.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_autopilot_version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_battery_status.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_button_change.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_camera_capture_status.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_camera_image_captured.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_camera_information.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_camera_settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_camera_trigger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_change_operator_control.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_change_operator_control_ack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_command_ack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_command_int.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_command_long.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_control_system_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_data_stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_data_transmission_handshake.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_debug_vect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_distance_sensor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_encapsulated_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_estimator_status.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_extended_sys_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_file_transfer_protocol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_flight_information.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_follow_target.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_global_position_int.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_global_position_int_cov.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_global_vision_position_estimate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps2_raw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps2_rtk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps_global_origin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps_inject_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps_input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps_raw_int.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps_rtcm_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps_rtk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_gps_status.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_heartbeat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_highres_imu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_high_latency.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_actuator_controls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_controls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_gps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_optical_flow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_rc_inputs_raw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_sensor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_hil_state_quaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_home_position.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_landing_target.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_local_position_ned.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_local_position_ned_cov.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_local_position_ned_system_global_offset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_logging_ack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_logging_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_logging_data_acked.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_log_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_log_entry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_log_erase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_log_request_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_log_request_end.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_log_request_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_manual_control.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_manual_setpoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_memory_vect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_message_interval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_ack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_clear_all.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_count.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_current.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_item_int.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_item_reached.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_request.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_request_int.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_request_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_request_partial_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_set_current.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mission_write_partial_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_mount_orientation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_named_value_float.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_named_value_int.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_nav_controller_output.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_obstacle_distance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_optical_flow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_optical_flow_rad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_ext_ack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_ext_request_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_ext_request_read.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_ext_set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_ext_value.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_map_rc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_request_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_request_read.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_param_value.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_ping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_play_tune.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_position_target_global_int.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_position_target_local_ned.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_power_status.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_protocol_version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_radio_status.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_raw_imu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_raw_pressure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_rc_channels.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_rc_channels_override.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_rc_channels_raw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_rc_channels_scaled.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_request_data_stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_resource_request.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_safety_allowed_area.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_safety_set_allowed_area.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_scaled_imu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_scaled_imu2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_scaled_imu3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_scaled_pressure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_scaled_pressure2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_scaled_pressure3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_serial_control.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_servo_output_raw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_setup_signing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_actuator_control_target.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_attitude_target.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_gps_global_origin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_home_position.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_mode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_position_target_global_int.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_position_target_local_ned.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_set_video_stream_settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_sim_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_statustext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_storage_information.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_system_time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_sys_status.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_terrain_check.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_terrain_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_terrain_report.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_terrain_request.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_timesync.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_uavcan_node_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_uavcan_node_status.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_v2_extension.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_vfr_hud.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_vibration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_vicon_position_estimate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_video_stream_information.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_vision_position_estimate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_vision_speed_estimate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_wifi_config_ap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\mavlink_msg_wind_cov.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\testsuite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\include\rc\mavlink\common\version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\src\common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\src\bmp\bmp_defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\src\math\algebra_common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\src\mpu\dmpKey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\src\mpu\dmpmap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\src\mpu\dmp_firmware.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="library\src\mpu\mpu_defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pru_firmware\src\resource_table_pru1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
