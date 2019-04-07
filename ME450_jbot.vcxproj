@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -144,7 +144,7 @@
     <ClCompile Include="examples\src\rc_test_vector.c" />
     <ClCompile Include="examples\src\rc_uart_loopback.c" />
     <ClCompile Include="examples\src\rc_version.c" />
-    <ClCompile Include="jb_test_odom.c" />
+    <ClCompile Include="jb_main.c" />
     <ClCompile Include="library\src\bmp\bmp.c" />
     <ClCompile Include="library\src\button.c" />
     <ClCompile Include="library\src\cpu.c" />
@@ -181,12 +181,14 @@
     <ClCompile Include="library\src\start_stop.c" />
     <ClCompile Include="library\src\time.c" />
     <ClCompile Include="library\src\version.c" />
-    <ClCompile Include="odom.c" />
+    <ClCompile Include="modules\jb_test_flysky.c" />
     <ClCompile Include="pru_firmware\src\main_pru0.c" />
     <ClCompile Include="pru_firmware\src\main_pru1.c" />
     <ClCompile Include="rc_project_template.c" />
     <ClCompile Include="services\rc_battery_monitor\src\rc_battery_monitor.c" />
     <ClCompile Include="services\robotcontrol\src\rc_startup_routine.c" />
+    <ClCompile Include="tests\jb_demo.c" />
+    <ClCompile Include="tests\jb_test_odom\jb_test_odom.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\src\footer.html" />

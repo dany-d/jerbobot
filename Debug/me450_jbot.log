@@ -1,0 +1,223 @@
+﻿  coord2trajec.c
+c:\documents\me450\me450_jbot\coord2trajec.h(13): fatal error C1083: Cannot open include file: 'rc/math.h': No such file or directory
+  rc_altitude.c
+c:\documents\me450\me450_jbot\examples\src\rc_altitude.c(15): fatal error C1083: Cannot open include file: 'rc/math/kalman.h': No such file or directory
+  rc_balance.c
+c:\documents\me450\me450_jbot\examples\src\rc_balance.c(8): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  rc_benchmark_algebra.c
+c:\documents\me450\me450_jbot\examples\src\rc_benchmark_algebra.c(20): fatal error C1083: Cannot open include file: 'getopt.h': No such file or directory
+  rc_bind_dsm.c
+c:\documents\me450\me450_jbot\examples\src\rc_bind_dsm.c(32): fatal error C1083: Cannot open include file: 'rc/dsm.h': No such file or directory
+  rc_blink.c
+c:\documents\me450\me450_jbot\examples\src\rc_blink.c(18): fatal error C1083: Cannot open include file: 'rc/button.h': No such file or directory
+  rc_calibrate_accel.c
+c:\documents\me450\me450_jbot\examples\src\rc_calibrate_accel.c(18): fatal error C1083: Cannot open include file: 'rc/mpu.h': No such file or directory
+  rc_calibrate_dsm.c
+c:\documents\me450\me450_jbot\examples\src\rc_calibrate_dsm.c(15): fatal error C1083: Cannot open include file: 'rc/dsm.h': No such file or directory
+  rc_calibrate_escs.c
+c:\documents\me450\me450_jbot\examples\src\rc_calibrate_escs.c(19): fatal error C1083: Cannot open include file: 'rc/servo.h': No such file or directory
+  rc_calibrate_gyro.c
+c:\documents\me450\me450_jbot\examples\src\rc_calibrate_gyro.c(18): fatal error C1083: Cannot open include file: 'rc/mpu.h': No such file or directory
+  rc_calibrate_mag.c
+c:\documents\me450\me450_jbot\examples\src\rc_calibrate_mag.c(16): fatal error C1083: Cannot open include file: 'rc/mpu.h': No such file or directory
+  rc_check_battery.c
+c:\documents\me450\me450_jbot\examples\src\rc_check_battery.c(9): fatal error C1083: Cannot open include file: 'rc/adc.h': No such file or directory
+  rc_cpu.c
+c:\documents\me450\me450_jbot\examples\src\rc_cpu.c(10): fatal error C1083: Cannot open include file: 'getopt.h': No such file or directory
+  rc_dsm_passthrough.c
+c:\documents\me450\me450_jbot\examples\src\rc_dsm_passthrough.c(15): fatal error C1083: Cannot open include file: 'getopt.h': No such file or directory
+  rc_kill.c
+c:\documents\me450\me450_jbot\examples\src\rc_kill.c(11): fatal error C1083: Cannot open include file: 'rc/start_stop.h': No such file or directory
+  rc_model.c
+c:\documents\me450\me450_jbot\examples\src\rc_model.c(15): fatal error C1083: Cannot open include file: 'rc/model.h': No such file or directory
+  rc_spi_loopback.c
+c:\documents\me450\me450_jbot\examples\src\rc_spi_loopback.c(13): fatal error C1083: Cannot open include file: 'rc/spi.h': No such file or directory
+  rc_test_adc.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_adc.c(13): fatal error C1083: Cannot open include file: 'rc/adc.h': No such file or directory
+  rc_test_algebra.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_algebra.c(11): fatal error C1083: Cannot open include file: 'rc/math.h': No such file or directory
+  rc_test_bmp.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_bmp.c(13): fatal error C1083: Cannot open include file: 'rc/math/filter.h': No such file or directory
+  Generating Code...
+  Compiling...
+  rc_test_buttons.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_buttons.c(11): fatal error C1083: Cannot open include file: 'rc/button.h': No such file or directory
+  rc_test_complementary_filters.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_complementary_filters.c(19): fatal error C1083: Cannot open include file: 'rc/math.h': No such file or directory
+  rc_test_dmp.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_dmp.c(15): fatal error C1083: Cannot open include file: 'getopt.h': No such file or directory
+  rc_test_dmp_tap.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_dmp_tap.c(14): fatal error C1083: Cannot open include file: 'getopt.h': No such file or directory
+  rc_test_drivers.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_drivers.c(10): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  rc_test_dsm.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_dsm.c(17): fatal error C1083: Cannot open include file: 'getopt.h': No such file or directory
+  rc_test_encoders.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_encoders.c(12): fatal error C1083: Cannot open include file: 'rc/encoder.h': No such file or directory
+  rc_test_encoders_eqep.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_encoders_eqep.c(13): fatal error C1083: Cannot open include file: 'rc/encoder_eqep.h': No such file or directory
+  rc_test_encoders_pru.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_encoders_pru.c(13): fatal error C1083: Cannot open include file: 'rc/encoder_pru.h': No such file or directory
+  rc_test_escs.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_escs.c(35): fatal error C1083: Cannot open include file: 'getopt.h': No such file or directory
+  rc_test_filters.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_filters.c(19): fatal error C1083: Cannot open include file: 'rc/math.h': No such file or directory
+  rc_test_kalman.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_kalman.c(23): fatal error C1083: Cannot open include file: 'rc/math/kalman.h': No such file or directory
+  rc_test_leds.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_leds.c(12): fatal error C1083: Cannot open include file: 'rc/led.h': No such file or directory
+  rc_test_matrix.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_matrix.c(11): fatal error C1083: Cannot open include file: 'rc/math.h': No such file or directory
+  rc_test_mavlink.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_mavlink.c(26): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  rc_test_motors.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_motors.c(13): fatal error C1083: Cannot open include file: 'getopt.h': No such file or directory
+  rc_test_mpu.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_mpu.c(17): fatal error C1083: Cannot open include file: 'getopt.h': No such file or directory
+  rc_test_polynomial.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_polynomial.c(11): fatal error C1083: Cannot open include file: 'rc/math.h': No such file or directory
+  rc_test_pthread.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_pthread.c(23): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  rc_test_servos.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_servos.c(37): fatal error C1083: Cannot open include file: 'getopt.h': No such file or directory
+  Generating Code...
+  Compiling...
+  rc_test_time.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_time.c(15): fatal error C1083: Cannot open include file: 'rc/time.h': No such file or directory
+  rc_test_vector.c
+c:\documents\me450\me450_jbot\examples\src\rc_test_vector.c(12): fatal error C1083: Cannot open include file: 'rc/math.h': No such file or directory
+  rc_uart_loopback.c
+c:\documents\me450\me450_jbot\examples\src\rc_uart_loopback.c(15): fatal error C1083: Cannot open include file: 'rc/uart.h': No such file or directory
+  rc_version.c
+c:\documents\me450\me450_jbot\examples\src\rc_version.c(16): fatal error C1083: Cannot open include file: 'rc/version.h': No such file or directory
+  jb_main.c
+c:\documents\me450\me450_jbot\jb_main.c(11): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  bmp.c
+c:\documents\me450\me450_jbot\library\src\bmp\bmp.c(10): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  button.c
+c:\documents\me450\me450_jbot\library\src\button.c(7): fatal error C1083: Cannot open include file: 'poll.h': No such file or directory
+  cpu.c
+c:\documents\me450\me450_jbot\library\src\cpu.c(8): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  deprecated.c
+c:\documents\me450\me450_jbot\library\src\deprecated.c(6): fatal error C1083: Cannot open include file: 'rc/start_stop.h': No such file or directory
+  dsm.c
+c:\documents\me450\me450_jbot\library\src\dsm.c(15): fatal error C1083: Cannot open include file: 'rc/pthread.h': No such file or directory
+  encoder.c
+c:\documents\me450\me450_jbot\library\src\encoder.c(6): fatal error C1083: Cannot open include file: 'rc/encoder.h': No such file or directory
+  adc.c
+c:\documents\me450\me450_jbot\library\src\io\adc.c(14): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  encoder_eqep.c
+c:\documents\me450\me450_jbot\library\src\io\encoder_eqep.c(13): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  gpio.c
+c:\documents\me450\me450_jbot\library\src\io\gpio.c(10): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  i2c.c
+c:\documents\me450\me450_jbot\library\src\io\i2c.c(11): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  pwm.c
+c:\documents\me450\me450_jbot\library\src\io\pwm.c(10): fatal error C1083: Cannot open include file: 'dirent.h': No such file or directory
+  spi.c
+c:\documents\me450\me450_jbot\library\src\io\spi.c(13): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  uart.c
+c:\documents\me450\me450_jbot\library\src\io\uart.c(11): fatal error C1083: Cannot open include file: 'termios.h': No such file or directory
+  led.c
+c:\documents\me450\me450_jbot\library\src\led.c(9): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  algebra.c
+c:\documents\me450\me450_jbot\library\src\math\algebra.c(16): fatal error C1083: Cannot open include file: 'rc/math/vector.h': No such file or directory
+  Generating Code...
+  Compiling...
+  algebra_common.c
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.h(26): error C2146: syntax error: missing ')' before identifier 'a'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.h(26): error C2061: syntax error: identifier 'a'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.h(26): error C2059: syntax error: ';'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.h(26): error C2059: syntax error: ','
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.h(26): error C2059: syntax error: ')'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.h(36): error C2146: syntax error: missing ')' before identifier 'a'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.h(36): error C2061: syntax error: identifier 'a'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.h(36): error C2059: syntax error: ';'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.h(36): error C2059: syntax error: ','
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.h(36): error C2059: syntax error: ')'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.c(9): error C2146: syntax error: missing ')' before identifier 'a'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.c(9): error C2061: syntax error: identifier 'a'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.c(9): error C2059: syntax error: ';'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.c(9): error C2059: syntax error: ','
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.c(9): error C2059: syntax error: ')'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.c(20): error C2146: syntax error: missing ')' before identifier 'a'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.c(20): error C2061: syntax error: identifier 'a'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.c(20): error C2059: syntax error: ';'
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.c(20): error C2059: syntax error: ','
+c:\documents\me450\me450_jbot\library\src\math\algebra_common.c(20): error C2059: syntax error: ')'
+  filter.c
+c:\documents\me450\me450_jbot\library\src\math\filter.c(16): fatal error C1083: Cannot open include file: 'rc/math/filter.h': No such file or directory
+  kalman.c
+c:\documents\me450\me450_jbot\library\src\math\kalman.c(10): fatal error C1083: Cannot open include file: 'rc/math/algebra.h': No such file or directory
+  matrix.c
+c:\documents\me450\me450_jbot\library\src\math\matrix.c(16): fatal error C1083: Cannot open include file: 'rc/math/other.h': No such file or directory
+  other.c
+c:\documents\me450\me450_jbot\library\src\math\other.c(15): fatal error C1083: Cannot open include file: 'rc/math/other.h': No such file or directory
+  polynomial.c
+c:\documents\me450\me450_jbot\library\src\math\polynomial.c(18): fatal error C1083: Cannot open include file: 'rc/math/polynomial.h': No such file or directory
+  quaternion.c
+c:\documents\me450\me450_jbot\library\src\math\quaternion.c(15): fatal error C1083: Cannot open include file: 'rc/math/quaternion.h': No such file or directory
+  ring_buffer.c
+c:\documents\me450\me450_jbot\library\src\math\ring_buffer.c(24): fatal error C1083: Cannot open include file: 'rc/math/ring_buffer.h': No such file or directory
+  vector.c
+c:\documents\me450\me450_jbot\library\src\math\vector.c(25): fatal error C1083: Cannot open include file: 'rc/math/other.h': No such file or directory
+  mavlink_udp.c
+c:\documents\me450\me450_jbot\library\src\mavlink_udp.c(20): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  model.c
+c:\documents\me450\me450_jbot\library\src\model.c(12): fatal error C1083: Cannot open include file: 'rc/model.h': No such file or directory
+  motor.c
+c:\documents\me450\me450_jbot\library\src\motor.c(8): fatal error C1083: Cannot open include file: 'rc/motor.h': No such file or directory
+  mpu.c
+c:\documents\me450\me450_jbot\library\src\mpu\mpu.c(16): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  pinmux.c
+c:\documents\me450\me450_jbot\library\src\pinmux.c(11): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  encoder_pru.c
+c:\documents\me450\me450_jbot\library\src\pru\encoder_pru.c(11): fatal error C1083: Cannot open include file: 'rc/pru.h': No such file or directory
+  pru.c
+c:\documents\me450\me450_jbot\library\src\pru\pru.c(17): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  servo.c
+c:\documents\me450\me450_jbot\library\src\pru\servo.c(12): fatal error C1083: Cannot open include file: 'rc/pru.h': No such file or directory
+  pthread.c
+c:\documents\me450\me450_jbot\library\src\pthread.c(7): fatal error C1083: Cannot open include file: 'sys/resource.h': No such file or directory
+  start_stop.c
+c:\documents\me450\me450_jbot\library\src\start_stop.c(11): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  time.c
+c:\documents\me450\me450_jbot\library\src\time.c(13): fatal error C1083: Cannot open include file: 'sys/time.h': No such file or directory
+  Generating Code...
+  Compiling...
+  version.c
+c:\documents\me450\me450_jbot\library\src\version.c(6): fatal error C1083: Cannot open include file: 'rc/version.h': No such file or directory
+  jb_test_flysky.c
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(18): error C2143: syntax error: missing ')' before '('
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(18): error C2091: function returns function
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(18): error C2059: syntax error: ')'
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(18): error C2143: syntax error: missing ')' before 'type'
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(19): error C2085: 'dummy': not in formal parameter list
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(19): error C2143: syntax error: missing ';' before '{'
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(21): warning C4033: '__signal_handler' must return a value
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(25): warning C4013: 'rc_set_state' undefined; assuming extern returning int
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(25): error C2065: 'RUNNING': undeclared identifier
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(26): warning C4013: 'rc_led_set' undefined; assuming extern returning int
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(26): error C2065: 'RC_LED_GREEN': undeclared identifier
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(28): warning C4013: 'rc_get_state' undefined; assuming extern returning int
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(28): error C2065: 'EXITING': undeclared identifier
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(31): warning C4013: 'rc_usleep' undefined; assuming extern returning int
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(36): error C2065: 'RC_LED_GREEN': undeclared identifier
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(37): warning C4013: 'rc_led_cleanup' undefined; assuming extern returning int
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(38): warning C4013: 'rc_button_cleanup' undefined; assuming extern returning int
+c:\documents\me450\me450_jbot\modules\jb_test_flysky.c(47): error C2065: 'EXITING': undeclared identifier
+  main_pru0.c
+c:\documents\me450\me450_jbot\pru_firmware\src\main_pru0.c(38): fatal error C1083: Cannot open include file: 'pru_cfg.h': No such file or directory
+  main_pru1.c
+c:\documents\me450\me450_jbot\pru_firmware\src\main_pru1.c(38): fatal error C1083: Cannot open include file: 'pru_cfg.h': No such file or directory
+  rc_project_template.c
+c:\documents\me450\me450_jbot\rc_project_template.c(9): fatal error C1083: Cannot open include file: 'robotcontrol.h': No such file or directory
+  rc_battery_monitor.c
+c:\documents\me450\me450_jbot\services\rc_battery_monitor\src\rc_battery_monitor.c(10): fatal error C1083: Cannot open include file: 'error.h': No such file or directory
+  rc_startup_routine.c
+c:\documents\me450\me450_jbot\services\robotcontrol\src\rc_startup_routine.c(12): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+  jb_demo.c
+c:\documents\me450\me450_jbot\tests\jb_demo.c(12): fatal error C1083: Cannot open include file: 'getopt.h': No such file or directory
+  jb_test_odom.c
+c:\documents\me450\me450_jbot\tests\jb_test_odom\jb_test_odom.c(12): fatal error C1083: Cannot open include file: 'robotcontrol.h': No such file or directory
+  Generating Code...

@@ -18,9 +18,6 @@
     <ClCompile Include="coord2trajec.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="odom.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="rc_project_template.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -273,7 +270,16 @@
     <ClCompile Include="services\robotcontrol\src\rc_startup_routine.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="jb_test_odom.c">
+    <ClCompile Include="jb_main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\jb_test_flysky.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\jb_demo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\jb_test_odom\jb_test_odom.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
