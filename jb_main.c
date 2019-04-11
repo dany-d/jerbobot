@@ -356,31 +356,31 @@ static void __position_controller(void)
 	cstate.wheelAngle5 = (rc_encoder_read(ENCODER_CHANNEL_5) * 2.0 * M_PI) \
 		/ (ENCODER_POLARITY_5 * GEARBOX_Z * ENCODER_RES); 
 
-	// find change in encoder position
+	// change in angle from last time step
 	double dAngle1 = cstate.wheelAngle1 - wheel1_old;
 	double dAngle4 = cstate.wheelAngle4 - wheel4_old;
 	double dAngle2 = cstate.wheelAngle2 - wheel2_old;
 	double dAngle3 = cstate.wheelAngle3 - wheel3_old;
 	double dYaw = cstate.wheelAngle5 - wheel5_old;
 
-	// change in position along resultant omni axes
+	// change in position along (rotated) omni axes
 	double dX_r = 0.5 * WHEEL_RADIUS_XY * (dAngle1 + dAngle4);
 	double dY_r = 0.5 * WHEEL_RADIUS_XY * (dAngle2 + dAngle3);
 	// rotation in omni axes due to differential drive
 	cstate.theta += (1 / TRACK_WIDTH) *
 		(dAngle4 - dAngle1 + dAngle2 - dAngle3);
 
-	// convert to change in global coords
+	// compute resultant change in global coords
 	cstate.x += dX_r * cos(ANGLE_GLOBAL2OMNI + cstate.theta) 
 		+ dY_r * sin(ANGLE_GLOBAL2OMNI + cstate.theta);
 	cstate.y += dX_r * sin(ANGLE_GLOBAL2OMNI + cstate.theta)
 		+ dY_r * cos(ANGLE_GLOBAL2OMNI + cstate.theta);
 		
 	// correct for full rotation
-	if (cstate.theta >= 2 * M_PI) {
+	if (cstate.theta > 2 * M_PI) {
 		cstate.theta = cstate.theta - 2 * M_PI;
 	}
-	else if (cstate.theta <= -2 * M_PI) {
+	else if (cstate.theta < 0) {
 		cstate.theta = cstate.theta + 2 * M_PI;
 	}
 

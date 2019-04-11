@@ -15,9 +15,9 @@
 #define GEARBOX_XY			26.851
 #define GEARBOX_Z		5.182
 #define ENCODER_RES		48
-#define WHEEL_RADIUS_XY		0.0762 // omni-wheel radius (m)
+#define WHEEL_RADIUS_XY		0.0762 // omni-wheel radius (m), 3 inch
 #define WHEEL_RADIUS_Z		0.02477 // silicone roller radius (m)
-#define TRACK_WIDTH		0.4 // update to distance between omni wheels
+#define TRACK_WIDTH		0.52 // update to distance between omni wheels
 #define V_NOMINAL		7.4
 #define ANGLE_GLOBAL2OMNI M_PI/4
 
@@ -58,15 +58,15 @@
 #define MOTOR_POLARITY_4	1
 #define MOTOR_POLARITY_5	-1
 #define ENCODER_CHANNEL_1	1
-#define ENCODER_CHANNEL_2	2
-#define ENCODER_CHANNEL_3	3
-#define ENCODER_CHANNEL_4	4
+#define ENCODER_CHANNEL_2	3
+#define ENCODER_CHANNEL_3	4
+#define ENCODER_CHANNEL_4	2
 #define ENCODER_CHANNEL_5	????
 #define ENCODER_POLARITY_1	-1
-#define ENCODER_POLARITY_2	1
-#define ENCODER_POLARITY_3	-1
+#define ENCODER_POLARITY_2	-1
+#define ENCODER_POLARITY_3	1
 #define ENCODER_POLARITY_4	1
-#define ENCODER_POLARITY_5 -1
+#define ENCODER_POLARITY_5	-1
 
 //	drive speeds when using remote control (dsm2)
 #define DRIVE_RATE_NOVICE	16

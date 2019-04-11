@@ -16,16 +16,16 @@
 #include <signal.h>
 
 #define ENCODER_CHANNEL_1	1
-#define ENCODER_CHANNEL_2	2
-#define ENCODER_CHANNEL_3	3
-#define ENCODER_CHANNEL_4	4
+#define ENCODER_CHANNEL_2	3
+#define ENCODER_CHANNEL_3	4
+#define ENCODER_CHANNEL_4	2
 #define ENCODER_POLARITY_1	-1
-#define ENCODER_POLARITY_2	1
-#define ENCODER_POLARITY_3	-1
+#define ENCODER_POLARITY_2	-1
+#define ENCODER_POLARITY_3	1
 #define ENCODER_POLARITY_4	1
 #define ENCODER_POLARITY_5	-1
 #define WHEEL_RADIUS_XY		0.0762 // omni-wheel radius (m)
-#define TRACK_WIDTH			0.4
+#define TRACK_WIDTH			0.52
 #define ANGLE_GLOBAL2OMNI	M_PI/4
 #define GEARBOX_XY			26.851
 #define SAMPLE_RATE_HZ		100
@@ -43,6 +43,8 @@ typedef struct core_state_t {
 
 	double x;
 	double y;
+	double x_r; // 4/10 added rotated axes to test only  !!!!!
+	double y_r;
 	double z;
 	double theta; ///< error in angle of omni-wheel axes
 } core_state_t;
@@ -112,35 +114,30 @@ int main() {
 	*/
 
 	// temp fix
-	printf("  wh_1   |");
-	printf("  wh_2   |");
-	printf("  wh_3   |");
-	printf("  wh_4   |");
-	printf("    x    |");
-	printf("    y    |");
-	printf("   x_r   |");
-	printf("   y_r   |");
-	printf("  theta  |");
+	printf("  wh_1   ");
+	printf("  wh_2   ");
+	printf("  wh_3   ");
+	printf("  wh_4   ");
+	printf("    x    ");
+	printf("    y    ");
+	printf("   x_r   ");
+	printf("   y_r   ");
+	printf("  theta  ");
 	printf("\n");
 
 	while (running) {
 		__position_controller();
 
-		double x_r = cstate.x * cos(ANGLE_GLOBAL2OMNI + cstate.theta)
-			+ cstate.y * sin(ANGLE_GLOBAL2OMNI + cstate.theta);
-		double y_r = -cstate.x * cos(ANGLE_GLOBAL2OMNI + cstate.theta)
-			+ cstate.y * sin(ANGLE_GLOBAL2OMNI + cstate.theta);
-
 		printf("\r");
-		printf("%7.3f  |", cstate.wheelAngle1);
-		printf("%7.3f  |", cstate.wheelAngle2);
-		printf("%7.3f  |", cstate.wheelAngle3);
-		printf("%7.3f  |", cstate.wheelAngle4);
-		printf("%7.3f  |", cstate.x);
-		printf("%7.3f  |", cstate.y);
-		printf("%7.3f  |", x_r);
-		printf("%7.3f  |", y_r);
-		printf("%7.3f  |", cstate.theta);
+		printf("%7.3f  ", cstate.wheelAngle1);
+		printf("%7.3f  ", cstate.wheelAngle2);
+		printf("%7.3f  ", cstate.wheelAngle3);
+		printf("%7.3f  ", cstate.wheelAngle4);
+		printf("%7.3f  ", cstate.x);
+		printf("%7.3f  ", cstate.y);
+		printf("%7.3f  ", cstate.x_r);
+		printf("%7.3f  ", cstate.y_r);
+		printf("%7.5f  ", cstate.theta);
 		printf("\n");
 		rc_usleep(50000);
 	}
@@ -163,7 +160,9 @@ static void __position_controller(void)
 	/******************************************************************
 	* STATE_ESTIMATION
 	* read sensors and compute the state when either ARMED or DISARMED
+	* recall that wheels 1&4 move +y_r, wheels 2&3 move +x_r
 	******************************************************************/
+	
 	double wheel1_old = cstate.wheelAngle1;
 	double wheel4_old = cstate.wheelAngle4;
 	double wheel2_old = cstate.wheelAngle2;
@@ -192,20 +191,28 @@ static void __position_controller(void)
 	double dX_r = 0.5 * WHEEL_RADIUS_XY * (dAngle1 + dAngle4);
 	double dY_r = 0.5 * WHEEL_RADIUS_XY * (dAngle2 + dAngle3);
 	// rotation in omni axes due to differential drive
-	cstate.theta += (1 / TRACK_WIDTH) *
+	cstate.theta += (2* WHEEL_RADIUS_XY/(4*TRACK_WIDTH)) * 
 		(dAngle4 - dAngle1 + dAngle2 - dAngle3);
+
+
+	// CHANGE MADE (4/9): removed 1/trackwidth from above in theta
+
+	// ADDED TO TEST ONLY
+	// translation in omni, rotated coordinates
+	cstate.x_r += dX_r;
+	cstate.y_r += dY_r;
 
 	// convert to change in global coords
 	cstate.x += dX_r * cos(ANGLE_GLOBAL2OMNI + cstate.theta)
-		+ dY_r * sin(ANGLE_GLOBAL2OMNI + cstate.theta);
+		- dY_r * sin(ANGLE_GLOBAL2OMNI + cstate.theta);
 	cstate.y += dX_r * sin(ANGLE_GLOBAL2OMNI + cstate.theta)
 		+ dY_r * cos(ANGLE_GLOBAL2OMNI + cstate.theta);
 
 	// correct for full rotation
-	if (cstate.theta >= 2 * M_PI) {
+	if (cstate.theta > 2 * M_PI) {
 		cstate.theta = cstate.theta - 2 * M_PI;
 	}
-	else if (cstate.theta <= -2 * M_PI) {
+	else if (cstate.theta < - 2 * M_PI) {
 		cstate.theta = cstate.theta + 2 * M_PI;
 	}
 
