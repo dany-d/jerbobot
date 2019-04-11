@@ -1,0 +1,8 @@
+% Testing GPIO Input from RC RX Channel 6
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "gpio.h"
+unsigned int pin = 67;	% Physical Pin P8-8
+
