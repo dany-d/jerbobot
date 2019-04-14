@@ -10,16 +10,17 @@
 
 
  // Structural properties of JerboBot
-#define BOARD_MOUNT_ANGLE	0.49 // increase if mip tends to roll forward
 #define GEARBOX_XY			26.851
 #define GEARBOX_Z		5.182
 #define ENCODER_RES		48
 #define WHEEL_RADIUS_XY		0.0762 // omni-wheel radius (m), 3 inch
 #define WHEEL_RADIUS_Z		0.02477 // silicone roller radius (m)
 #define TRACK_WIDTH		0.52 // update to distance between omni wheels
-#define V_NOMINAL		7.4
+#define V_NOMINAL		11.1
 #define ANGLE_GLOBAL2OMNI M_PI/4
-#define ACCEL_MAX			10	// m/s2 acceleration, rad/s2 for this test
+#define ACCEL_MAX			30 	// m/s2 acceleration, rad/s2 for this test
+							// ^^^ was 10 for earlier, testing limits
+
 
 // inner test loop controller, 100 hz?
 #define D1_KP				10

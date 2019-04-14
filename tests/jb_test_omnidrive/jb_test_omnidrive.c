@@ -51,29 +51,31 @@ typedef struct core_state_t {
 	double wheelAngle3;
 	double wheelAngle4;
 	double wheelAngle5; ///< "wheel" rotation for telescoping arm
-	double d1_u; /// < output of test motor controller D1
+	double d1_u;		/// < output of test motor controller D1
 	double d4_u; 
 	double d2_u;
 	double d3_u;
-	double x;
+	double vBatt;		///< battery voltage
+	double x;			///< global coordinates, x
 	double y;
-	double x_r; 
+	double x_r;			///< 45d rotated, omni coordinates, x
 	double y_r;
 	double z;
-	double theta; ///< error in angle of omni-wheel axes
-	int step; ///< step (row) in trajec mat currently pursuing
-	double t_1; ///< initial time (end of last) in trajectory
-	double t_2; ///< next time to reach trajectory pt
-	uint64_t t_curr;
-	double v_xr_des; ///< desired x_r velocity, to be updated by trajec
-	double v_yr_des; ///< desired x_r velocity, to be updated by trajec
+	double theta;		///< error in angle of omni axis relative to global
+	int step;			///< step (row) in trajec mat to pursue
+	double t_1;			///< initial time (end of previous) in trajectory
+	double t_2;			///< next time to reach trajectory pt
+	uint64_t t_curr;	///< current time in ms
+	double v_xr_des;	///< desired x_r velocity, to be updated by trajec
+	double v_yr_des;	///< desired x_r velocity, to be updated by trajec
 } core_state_t;
 
 static void __print_usage(void);
 static void __position_controller(void);	///< mpu interrupt routine
 static void __setpoint_manager(void);
 static void __traject_new(void);
-static void* __print_loop(void* ptr); 
+static void* __print_loop(void* ptr);		///< background thread
+static void* __battery_checker(void* ptr);	///< background thread
 static int __zero_out_controller(void);
 static int __disarm_controller(void);
 static int __arm_controller(void);
@@ -105,6 +107,8 @@ static void __print_usage(void)
 int main(int argc, char *argv[]) {
 	int c;
 	pthread_t printf_thread = 0;
+	pthread_t battery_thread = 0;
+	bool adc_ok = true; 
 
 	// parse arguments
 	opterr = 0;
@@ -171,13 +175,11 @@ int main(int argc, char *argv[]) {
 
 	//rc_usleep(1000000); // wait 1 second before starting
 
-	/*
 	// initialize adc
 	if (rc_adc_init() == -1) {
 		fprintf(stderr, "failed to initialize adc\n");
 		adc_ok = false;
 	}
-	*/
 
 	// make PID file to indicate your project is running
 	// due to the check made on the call to rc_kill_existing_process() above
@@ -228,11 +230,12 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 
+	// likely don't need soft start due to trapezoid profile
 	//rc_filter_enable_saturation(&D1, -5, 5);
-	rc_filter_enable_soft_start(&D1, SOFT_START_SEC);
-	rc_filter_enable_soft_start(&D4, SOFT_START_SEC);
-	rc_filter_enable_soft_start(&D2, SOFT_START_SEC);
-	rc_filter_enable_soft_start(&D3, SOFT_START_SEC);
+	//rc_filter_enable_soft_start(&D1, SOFT_START_SEC);
+	//rc_filter_enable_soft_start(&D4, SOFT_START_SEC);
+	//rc_filter_enable_soft_start(&D2, SOFT_START_SEC);
+	//rc_filter_enable_soft_start(&D3, SOFT_START_SEC);
 
 	printf("Motor1 controller D1:\n");
 	rc_filter_print(D1);
@@ -242,6 +245,20 @@ int main(int argc, char *argv[]) {
 	rc_filter_print(D2);
 	printf("Motor2 controller D3:\n");
 	rc_filter_print(D3);
+
+	// start a thread to slowly sample battery
+	if (adc_ok) {
+		if (rc_pthread_create(&battery_thread, __battery_checker, (void*)NULL, SCHED_OTHER, 0)) {
+			fprintf(stderr, "failed to start battery thread\n");
+			return -1;
+		}
+	}
+	else { // If we can't get the battery voltage
+		cstate.vBatt = V_NOMINAL; // Set to a nominal value
+	}
+
+	// wait for the battery thread to make the first read
+	while (cstate.vBatt < 1.0 && rc_get_state() != EXITING) rc_usleep(10000);
 
 	// start printf_thread if running from a terminal
 	// if it was started as a background process then don't bother
@@ -266,34 +283,38 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 	trajec_mat.d[0][0] = 0; // time 0
-	trajec_mat.d[0][1] = 0; // pos_x 0
-	trajec_mat.d[0][2] = 0; // pos_y 1
-	trajec_mat.d[1][0] = 5; // time 1
+	trajec_mat.d[0][1] = 0; // pos_x_r 0
+	trajec_mat.d[0][2] = 0; // pos_y_r 1
+	trajec_mat.d[1][0] = 2.5; // time 1
 	trajec_mat.d[1][1] = 40; 
 	trajec_mat.d[1][2] = 0;
-	trajec_mat.d[2][0] = 10; // time 2
+	trajec_mat.d[2][0] = 5; // time 2
 	trajec_mat.d[2][1] = 40; 
 	trajec_mat.d[2][2] = 40;
-	trajec_mat.d[3][0] = 15; // time 3
+	trajec_mat.d[3][0] = 7.5; // time 3
 	trajec_mat.d[3][1] = 80;
 	trajec_mat.d[3][2] = 80;
 	
 	// declare time (ms)
 	cstate.t_1 = trajec_mat.d[0][0]; // assign first times
 	cstate.t_2 = trajec_mat.d[1][0];
-	test_start = rc_nanos_since_boot() / 1000000;
+	
 
 	// this should be the last step in initialization
 	// to make sure other setup functions don't interfere
 	rc_mpu_set_dmp_callback(&__position_controller);
 	rc_set_state(RUNNING);
+	test_start = rc_nanos_since_boot(); // in ns, used to check if first run
 	__arm_controller();
 	rc_led_set(RC_LED_RED, 0);
 	rc_led_set(RC_LED_GREEN, 1);
-
 	while (rc_get_state() != EXITING) {
 		rc_usleep(200000);
 	}
+
+	// join parallel threads
+	if (printf_thread) rc_pthread_timed_join(printf_thread, NULL, 1.5);
+	if (battery_thread) rc_pthread_timed_join(battery_thread, NULL, 1.5);
 
 	// final cleanup
 	rc_filter_free(&D1);
@@ -387,6 +408,7 @@ static void __traject_new(void) {
 			__disarm_controller();
 			printf("Final destination reached. Thank you for choosing JerboBot Express.");
 			cstate.v_xr_des = 0;
+			cstate.v_yr_des = 0;
 			rc_set_state(EXITING);
 			return;
 		}
@@ -400,8 +422,9 @@ static void __traject_new(void) {
 	
 
 	// time of current maneuver
+	
 	double t_test = (double)(cstate.t_curr - test_start) / 1000
-		- trajec_mat.d[cstate.step][0];
+		- cstate.t_1;
 
 	double xr_diff = trajec_mat.d[cstate.step + 1][1] -
 		trajec_mat.d[cstate.step][1];
@@ -415,27 +438,38 @@ static void __traject_new(void) {
 		pow(pow((cstate.t_2 - cstate.t_1), 2) - 4 * yr_diff / ACCEL_MAX, .5)) / 2);
 
 	// assign desired x_r velocity based on trapezoidal profile
+	//if (xr_diff == 0) cstate.v_xr_des = 0; // no change
 	if (t_test <= t_ax) {
 		// accelerating, trapezoid left
+		printf("ACC_x");
 		cstate.v_xr_des = ACCEL_MAX * t_test;
 	}
-	else if (t_test >= cstate.t_2 - t_ax) {
+	else if (t_test >= cstate.t_2 - cstate.t_1 - t_ax) {
 		// decelerating, trapezoid right
+		printf("DEC_x");
 		cstate.v_xr_des = ACCEL_MAX * (cstate.t_2 - t_test);
 	}
 	else {
 		// constant velocity, trapezoid plateau
+		printf("CONS_x");
 		cstate.v_xr_des = ACCEL_MAX * t_ax;
 	}
 
 	// similarly, for y_r
+	//if (yr_diff == 0) cstate.v_yr_des = 0; // no change
 	if (t_test <= t_ay) {
 		cstate.v_yr_des = ACCEL_MAX * t_test;
+		printf("ACC_y");
+		printf("\n");
 	}
-	else if (t_test >= cstate.t_2 - t_ay) {
+	else if (t_test >= cstate.t_2 - cstate.t_1 - t_ay) {
+		printf("DEC_y");
+		printf("\n");
 		cstate.v_yr_des = ACCEL_MAX * (cstate.t_2 - t_test);
 	}
 	else {
+		printf("CONS_y");
+		printf("\n");
 		cstate.v_yr_des = ACCEL_MAX * t_ay;
 	}
 
@@ -455,6 +489,13 @@ static void __position_controller(void)
 	static int inner_saturation_counter = 0;
 	double duty1, duty4, duty2, duty3;
 	//double duty5;
+	
+	if (test_start > 999999999) {
+		// first time initializing test_start 
+		// properly sync with start of control
+		// careful if run on boot, may not work
+		test_start = rc_nanos_since_boot() / 1000000; // ms
+	}
 
 	/**
 	* updating desired state
@@ -543,6 +584,10 @@ static void __position_controller(void)
 	*************************************************************/
 	//D1.gain = D1_GAIN;
 	//V_NOMINAL / cstate.vBatt; // original gain compensation for batt voltage
+	D1.gain = D1_GAIN * V_NOMINAL / cstate.vBatt;
+	D2.gain = D2_GAIN * V_NOMINAL / cstate.vBatt;
+	D3.gain = D3_GAIN * V_NOMINAL / cstate.vBatt;
+	D4.gain = D4_GAIN * V_NOMINAL / cstate.vBatt;
 	cstate.d1_u = rc_filter_march(&D1, setpoint.wheelAngle1 
 		- cstate.wheelAngle1);
 	cstate.d4_u = rc_filter_march(&D4, setpoint.wheelAngle4
@@ -551,6 +596,7 @@ static void __position_controller(void)
 		- cstate.wheelAngle2);
 	cstate.d3_u = rc_filter_march(&D3, setpoint.wheelAngle3
 		- cstate.wheelAngle3);
+	
 
 	/*************************************************************
 	* Check if the inner loop saturated. If it saturates for over
@@ -653,27 +699,30 @@ static int __arm_controller(void)
 		 new_rc_state = rc_get_state();
 		 // check if this is the first time since being paused
 		 if (new_rc_state == RUNNING && last_rc_state != RUNNING) {
-			 rc_usleep(30000); // let controller catch up
-			 fprintf(fout, "    t    ");
+			 rc_usleep(50000); // let controller catch up
+			 fprintf(fout, "    t    "); // col1
 			 fprintf(fout, "  wh_1   ");
 			 fprintf(fout, "  wh_1s  ");
 			 fprintf(fout, "  wh_2   ");
-			 fprintf(fout, "  wh_2s  ");
+			 fprintf(fout, "  wh_2s  "); // col 5
 			 fprintf(fout, "  wh_3   ");
 			 fprintf(fout, "  wh_3s  ");
 			 fprintf(fout, "  wh_4   ");
 			 fprintf(fout, "  wh_4s  ");
+			 fprintf(fout, " v_xr_des"); // col 10
 			 fprintf(fout, " v_yr_des");
-			 fprintf(fout, " v_xr_des");
 			 fprintf(fout, "    x    ");
 			 fprintf(fout, "    y    ");
 			 fprintf(fout, "   x_r   ");
-			 fprintf(fout, "   y_r   ");
+			 fprintf(fout, "   y_r   "); // col 15
 			 fprintf(fout, "  theta  ");
 			 fprintf(fout, "   d1_u  ");
 			 fprintf(fout, "   d2_u  ");
 			 fprintf(fout, "   d3_u  ");
-			 fprintf(fout, "   d4_u  ");
+			 fprintf(fout, "   d4_u  "); // col 20
+			 fprintf(fout, "   a_x   ");
+			 fprintf(fout, "   a_y   ");
+			 fprintf(fout, "theta_dot");
 			 fprintf(fout, "\n");
 		 }
 		 else if (new_rc_state == PAUSED && last_rc_state != PAUSED) {
@@ -709,9 +758,31 @@ static int __arm_controller(void)
 			 fprintf(fout, "%7.3f  ", cstate.d2_u);
 			 fprintf(fout, "%7.3f  ", cstate.d3_u);
 			 fprintf(fout, "%7.3f  ", cstate.d4_u);
+			 fprintf(fout, "%7.5f  ", mpu_data.accel[0]);
+			 fprintf(fout, "%7.5f  ", mpu_data.accel[1]);
+			 fprintf(fout, "%7.5f  ", mpu_data.gyro[2] * DEG_TO_RAD);
 			 //fprintf(fout, "\n");
 		 }
 		 rc_usleep(1000000 / PRINTF_HZ);
+	 }
+	 return NULL;
+ }
+
+ /**
+ * Slow loop checking battery voltage. Also changes the D1-4 saturation limit
+ * since that is dependent on the battery voltage.
+ *
+ * @return     nothing, NULL poitner
+ */
+ static void* __battery_checker(__attribute__((unused)) void* ptr)
+ {
+	 double new_v;
+	 while (rc_get_state() != EXITING) {
+		 new_v = rc_adc_batt();
+		 // if the value doesn't make sense, use nominal voltage
+		 if (new_v > 13 || new_v < 10.0) new_v = V_NOMINAL;
+		 cstate.vBatt = new_v;
+		 rc_usleep(1000000 / BATTERY_CHECK_HZ);
 	 }
 	 return NULL;
  }
