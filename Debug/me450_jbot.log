@@ -218,6 +218,10 @@ c:\documents\me450\me450_jbot\services\rc_battery_monitor\src\rc_battery_monitor
 c:\documents\me450\me450_jbot\services\robotcontrol\src\rc_startup_routine.c(12): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
   jb_demo.c
 c:\documents\me450\me450_jbot\tests\jb_demo.c(12): fatal error C1083: Cannot open include file: 'getopt.h': No such file or directory
+  jb_test_motorpid.c
+c:\documents\me450\me450_jbot\tests\jb_test_motorpid\jb_test_motorpid.c(11): fatal error C1083: Cannot open include file: 'robotcontrol.h': No such file or directory
+  jb_test_odomdrive.c
+c:\documents\me450\me450_jbot\tests\jb_test_odomdrive\jb_test_odomdrive.c(12): fatal error C1083: Cannot open include file: 'robotcontrol.h': No such file or directory
   jb_test_odom.c
 c:\documents\me450\me450_jbot\tests\jb_test_odom\jb_test_odom.c(12): fatal error C1083: Cannot open include file: 'robotcontrol.h': No such file or directory
   Generating Code...

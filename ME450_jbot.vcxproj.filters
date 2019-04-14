@@ -285,6 +285,9 @@
     <ClCompile Include="tests\jb_test_odomdrive\jb_test_odomdrive.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests\jb_test_motorpid\jb_test_motorpid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="pru_firmware\src\pru0-encoder.asm">

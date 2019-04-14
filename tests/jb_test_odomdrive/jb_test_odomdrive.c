@@ -1,11 +1,11 @@
 /**
-* JerboBot Odom Test
+* JerboBot OdomDrive Test
 * Taylor Sun (taysun@umich.edu)
-* Last updated: 3/27/19
+* Last updated: 4/11/19
 *
 *
-* Test reading of encoders, conversion
-* from omni-coord to global-coord
+* Test performance of motors to track
+* specified trajectory
 */
 
 #include <stdio.h>
@@ -239,8 +239,8 @@ static void __position_controller(void)
 		/ (ENCODER_POLARITY_4 * GEARBOX_XY * ENCODER_RES);
 	/*cstate.wheelAngle5 = (rc_encoder_read(ENCODER_CHANNEL_5) * 2.0 * M_PI) \
 		/ (ENCODER_POLARITY_5 * GEARBOX_Z * ENCODER_RES);
-*/
-// find change in encoder position
+	*/
+	// find change in encoder position
 	double dAngle1 = cstate.wheelAngle1 - wheel1_old;
 	double dAngle4 = cstate.wheelAngle4 - wheel4_old;
 	double dAngle2 = cstate.wheelAngle2 - wheel2_old;
@@ -327,6 +327,7 @@ static void __position_controller(void)
 			 fprintf(fout, "%7.3f  ", x_r);
 			 fprintf(fout, "%7.3f  ", y_r);
 			 fprintf(fout, "%7.5f  ", cstate.theta);
+			 fprintf(fout, "\n");
 		 }
 		 rc_usleep(1000000 / 50);
 	 }

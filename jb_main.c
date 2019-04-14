@@ -13,8 +13,12 @@
 #include <math.h> // for M_PI
 #include <robotcontrol.h>
 
+/*
+* As of 4/11, super outdated below, update according to jb_test_odomdrive
+*  and other test implementations later
+*/
 
-#include "odom.h"
+
 
 /**
  * ARMED or DISARMED to indicate if the controller is running
