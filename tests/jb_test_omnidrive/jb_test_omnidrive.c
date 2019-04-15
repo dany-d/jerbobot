@@ -98,7 +98,7 @@ static rc_matrix_t trajec_mat = RC_MATRIX_INITIALIZER;
 static void __print_usage(void)
 {
 	printf("\n");
-	printf("-f {filename}     print results to filename (beware overwrite)\n");
+	printf("-f {filename}     print results to filename\n");
 	printf("-s                print results to terminal\n");
 	printf("-h                print this help message\n");
 	printf("\n");
@@ -116,6 +116,7 @@ int main(int argc, char *argv[]) {
 		switch (c) {
 		case 'f':  // print to file
 			fout = fopen(optarg, "w");
+			// CHECK IF WRITING TO A WRITE PROTECTED FILE
 			break;
 		case 's':
 			break;
@@ -230,13 +231,6 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 
-	// likely don't need soft start due to trapezoid profile
-	//rc_filter_enable_saturation(&D1, -5, 5);
-	//rc_filter_enable_soft_start(&D1, SOFT_START_SEC);
-	//rc_filter_enable_soft_start(&D4, SOFT_START_SEC);
-	//rc_filter_enable_soft_start(&D2, SOFT_START_SEC);
-	//rc_filter_enable_soft_start(&D3, SOFT_START_SEC);
-
 	printf("Motor1 controller D1:\n");
 	rc_filter_print(D1);
 	printf("Motor2 controller D4:\n");
@@ -299,7 +293,6 @@ int main(int argc, char *argv[]) {
 	cstate.t_1 = trajec_mat.d[0][0]; // assign first times
 	cstate.t_2 = trajec_mat.d[1][0];
 	
-
 	// this should be the last step in initialization
 	// to make sure other setup functions don't interfere
 	rc_mpu_set_dmp_callback(&__position_controller);
@@ -394,7 +387,7 @@ static void __traject_new(void) {
 	if (cstate.step + 2 < trajec_mat.rows) {
 		// not yet aiming for final destination
 		// update desired destination and time if surpassed
-		if ((cstate.t_curr - test_start) / 1000 >=
+		if ((double)(cstate.t_curr - test_start) / 1000 >=
 			trajec_mat.d[cstate.step + 1][0]) {
 			++cstate.step;
 			cstate.t_1 = trajec_mat.d[cstate.step][0]; // previous time, s
@@ -403,7 +396,7 @@ static void __traject_new(void) {
 	}
 	else {
 		// aiming for final destination
-		if ((cstate.t_curr - test_start) / 1000 >=
+		if ((double)(cstate.t_curr - test_start) / 1000 >=
 			trajec_mat.d[cstate.step + 1][0]) {
 			__disarm_controller();
 			printf("Final destination reached. Thank you for choosing JerboBot Express.");
@@ -420,16 +413,20 @@ static void __traject_new(void) {
 		return;
 	}
 	
-
-	// time of current maneuver
-	
+	// time since beginning of current maneuver
 	double t_test = (double)(cstate.t_curr - test_start) / 1000
 		- cstate.t_1;
 
 	double xr_diff = trajec_mat.d[cstate.step + 1][1] -
 		trajec_mat.d[cstate.step][1];
+	int xr_sign = (xr_diff > 0) - (xr_diff < 0);
 	double yr_diff = trajec_mat.d[cstate.step + 1][2] -
 		trajec_mat.d[cstate.step][2];
+	int yr_sign = (yr_diff > 0) - (yr_diff < 0);
+	
+	// update differences to be magnitude only
+	xr_diff *= xr_sign;
+	yr_diff *= yr_sign;
 
 	// solutions for acceleration (and deacc) time for trapezoidal profile
 	double t_ax = ((cstate.t_2 - cstate.t_1 -
@@ -438,39 +435,30 @@ static void __traject_new(void) {
 		pow(pow((cstate.t_2 - cstate.t_1), 2) - 4 * yr_diff / ACCEL_MAX, .5)) / 2);
 
 	// assign desired x_r velocity based on trapezoidal profile
-	//if (xr_diff == 0) cstate.v_xr_des = 0; // no change
 	if (t_test <= t_ax) {
 		// accelerating, trapezoid left
-		printf("ACC_x");
-		cstate.v_xr_des = ACCEL_MAX * t_test;
+		cstate.v_xr_des = xr_sign * ACCEL_MAX * t_test;
 	}
 	else if (t_test >= cstate.t_2 - cstate.t_1 - t_ax) {
 		// decelerating, trapezoid right
-		printf("DEC_x");
-		cstate.v_xr_des = ACCEL_MAX * (cstate.t_2 - t_test);
+		cstate.v_xr_des = xr_sign * ACCEL_MAX * 
+			(cstate.t_2 - cstate.t_1 - t_test);
 	}
 	else {
 		// constant velocity, trapezoid plateau
-		printf("CONS_x");
-		cstate.v_xr_des = ACCEL_MAX * t_ax;
+		cstate.v_xr_des = xr_sign * ACCEL_MAX * t_ax;
 	}
 
 	// similarly, for y_r
-	//if (yr_diff == 0) cstate.v_yr_des = 0; // no change
 	if (t_test <= t_ay) {
-		cstate.v_yr_des = ACCEL_MAX * t_test;
-		printf("ACC_y");
-		printf("\n");
+		cstate.v_yr_des = yr_sign * ACCEL_MAX * t_test;
 	}
 	else if (t_test >= cstate.t_2 - cstate.t_1 - t_ay) {
-		printf("DEC_y");
-		printf("\n");
-		cstate.v_yr_des = ACCEL_MAX * (cstate.t_2 - t_test);
+		cstate.v_yr_des = yr_sign * ACCEL_MAX * 
+			(cstate.t_2 - cstate.t_1 - t_test);
 	}
 	else {
-		printf("CONS_y");
-		printf("\n");
-		cstate.v_yr_des = ACCEL_MAX * t_ay;
+		cstate.v_yr_des = yr_sign * ACCEL_MAX * t_ay;
 	}
 
 	// update desired state
@@ -524,6 +512,14 @@ static void __position_controller(void)
 	/*cstate.wheelAngle5 = (rc_encoder_read(ENCODER_CHANNEL_5) * 2.0 * M_PI) \
 		/ (ENCODER_POLARITY_5 * GEARBOX_Z * ENCODER_RES);
 	*/
+
+	if (rc_mpu_read_accel(&mpu_data) < 0) {
+		printf("read accel data failed\n");
+	}
+	if (rc_mpu_read_gyro(&mpu_data) < 0) {
+		printf("read gyro data failed\n");
+	}
+	// TO DO: read magnetometer?
 
 	// find change in encoder position
 	double dAngle1 = cstate.wheelAngle1 - wheel1_old;
@@ -582,9 +578,7 @@ static void __position_controller(void)
 	* Input to D1 is theta error (setpoint-state). Then scale the
 	* output u to compensate for changing battery voltage.
 	*************************************************************/
-	//D1.gain = D1_GAIN;
-	//V_NOMINAL / cstate.vBatt; // original gain compensation for batt voltage
-	D1.gain = D1_GAIN * V_NOMINAL / cstate.vBatt;
+	D1.gain = D1_GAIN * V_NOMINAL / cstate.vBatt; // comp for batt voltage
 	D2.gain = D2_GAIN * V_NOMINAL / cstate.vBatt;
 	D3.gain = D3_GAIN * V_NOMINAL / cstate.vBatt;
 	D4.gain = D4_GAIN * V_NOMINAL / cstate.vBatt;
