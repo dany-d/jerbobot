@@ -144,7 +144,7 @@
     <ClCompile Include="examples\src\rc_test_vector.c" />
     <ClCompile Include="examples\src\rc_uart_loopback.c" />
     <ClCompile Include="examples\src\rc_version.c" />
-    <ClCompile Include="jb_main.c" />
+    <ClCompile Include="jb_main\jb_main.c" />
     <ClCompile Include="library\src\bmp\bmp.c" />
     <ClCompile Include="library\src\button.c" />
     <ClCompile Include="library\src\cpu.c" />
@@ -188,9 +188,13 @@
     <ClCompile Include="services\rc_battery_monitor\src\rc_battery_monitor.c" />
     <ClCompile Include="services\robotcontrol\src\rc_startup_routine.c" />
     <ClCompile Include="tests\jb_demo.c" />
+    <ClCompile Include="tests\jb_test_arm\jb_test_arm.c" />
     <ClCompile Include="tests\jb_test_motorpid\jb_test_motorpid.c" />
     <ClCompile Include="tests\jb_test_odomdrive\jb_test_odomdrive.c" />
     <ClCompile Include="tests\jb_test_odom\jb_test_odom.c" />
+    <ClCompile Include="tests\jb_test_omnidrive\jb_test_omnidrive.c" />
+    <ClCompile Include="tests\jb_test_pru1\jb_test_pru1.c" />
+    <ClCompile Include="tests\jb_test_RC_interrupt\jb_test_RC_interrupt.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\src\footer.html" />

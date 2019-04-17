@@ -91,7 +91,7 @@ c:\documents\me450\me450_jbot\examples\src\rc_uart_loopback.c(15): fatal error C
   rc_version.c
 c:\documents\me450\me450_jbot\examples\src\rc_version.c(16): fatal error C1083: Cannot open include file: 'rc/version.h': No such file or directory
   jb_main.c
-c:\documents\me450\me450_jbot\jb_main.c(11): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+c:\documents\me450\me450_jbot\jb_main\jb_main.c(11): fatal error C1083: Cannot open include file: 'robotcontrol.h': No such file or directory
   bmp.c
 c:\documents\me450\me450_jbot\library\src\bmp\bmp.c(10): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
   button.c
@@ -218,10 +218,18 @@ c:\documents\me450\me450_jbot\services\rc_battery_monitor\src\rc_battery_monitor
 c:\documents\me450\me450_jbot\services\robotcontrol\src\rc_startup_routine.c(12): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
   jb_demo.c
 c:\documents\me450\me450_jbot\tests\jb_demo.c(12): fatal error C1083: Cannot open include file: 'getopt.h': No such file or directory
+  jb_test_arm.c
+c:\documents\me450\me450_jbot\tests\jb_test_arm\jb_test_arm.c(11): fatal error C1083: Cannot open include file: 'robotcontrol.h': No such file or directory
   jb_test_motorpid.c
 c:\documents\me450\me450_jbot\tests\jb_test_motorpid\jb_test_motorpid.c(11): fatal error C1083: Cannot open include file: 'robotcontrol.h': No such file or directory
   jb_test_odomdrive.c
 c:\documents\me450\me450_jbot\tests\jb_test_odomdrive\jb_test_odomdrive.c(12): fatal error C1083: Cannot open include file: 'robotcontrol.h': No such file or directory
   jb_test_odom.c
 c:\documents\me450\me450_jbot\tests\jb_test_odom\jb_test_odom.c(12): fatal error C1083: Cannot open include file: 'robotcontrol.h': No such file or directory
+  jb_test_omnidrive.c
+c:\documents\me450\me450_jbot\tests\jb_test_omnidrive\jb_test_omnidrive.c(11): fatal error C1083: Cannot open include file: 'robotcontrol.h': No such file or directory
+  jb_test_pru1.c
+c:\documents\me450\me450_jbot\tests\jb_test_pru1\jb_test_pru1.c(13): fatal error C1083: Cannot open include file: 'rc/pru.h': No such file or directory
+  jb_test_RC_interrupt.c
+c1 : fatal error C1083: Cannot open source file: 'tests\jb_test_RC_interrupt\jb_test_RC_interrupt.c': No such file or directory
   Generating Code...

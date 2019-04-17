@@ -270,9 +270,6 @@
     <ClCompile Include="services\robotcontrol\src\rc_startup_routine.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="jb_main.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="modules\jb_test_flysky.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -286,6 +283,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\jb_test_motorpid\jb_test_motorpid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\jb_test_pru1\jb_test_pru1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\jb_test_omnidrive\jb_test_omnidrive.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="jb_main\jb_main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\jb_test_arm\jb_test_arm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\jb_test_RC_interrupt\jb_test_RC_interrupt.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
