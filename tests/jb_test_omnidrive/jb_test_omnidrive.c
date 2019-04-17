@@ -279,13 +279,13 @@ int main(int argc, char *argv[]) {
 	trajec_mat.d[0][0] = 0; // time 0
 	trajec_mat.d[0][1] = 0; // pos_x_r 0
 	trajec_mat.d[0][2] = 0; // pos_y_r 1
-	trajec_mat.d[1][0] = 2.5; // time 1
+	trajec_mat.d[1][0] = 3; // time 1
 	trajec_mat.d[1][1] = 40; 
 	trajec_mat.d[1][2] = 0;
-	trajec_mat.d[2][0] = 5; // time 2
+	trajec_mat.d[2][0] = 6; // time 2
 	trajec_mat.d[2][1] = 40; 
 	trajec_mat.d[2][2] = 40;
-	trajec_mat.d[3][0] = 7.5; // time 3
+	trajec_mat.d[3][0] = 9; // time 3
 	trajec_mat.d[3][1] = 80;
 	trajec_mat.d[3][2] = 80;
 	

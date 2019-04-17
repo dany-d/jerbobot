@@ -18,9 +18,9 @@
 #define TRACK_WIDTH		0.52 // update to distance between omni wheels
 #define V_NOMINAL		11.1
 #define ANGLE_GLOBAL2OMNI M_PI/4
-#define ACCEL_MAX			30 	// m/s2 acceleration, rad/s2 for this test
+#define ACCEL_MAX			20 	// m/s2 acceleration, rad/s2 for this test
 							// ^^^ was 10 for earlier, testing limits
-
+#define Z_ACCEL_MAX			
 
 // inner test loop controller, 100 hz?
 #define D1_KP				10
@@ -53,7 +53,7 @@
 #define MOTOR_POLARITY_2	1
 #define MOTOR_POLARITY_3	-1
 #define MOTOR_POLARITY_4	-1
-#define MOTOR_POLARITY_5	-1
+#define MOTOR_POLARITY_5	1
 #define ENCODER_CHANNEL_1	1
 #define ENCODER_CHANNEL_2	3
 #define ENCODER_CHANNEL_3	4
@@ -83,6 +83,7 @@
 #define SETPOINT_MANAGER_HZ	200
 #define PRINTF_HZ		50
 #define SAMPLE_RATE_HZ		200
+#define RC_READER_HZ	20
 #define DT					0.005
 
 // other
