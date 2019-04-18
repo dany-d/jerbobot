@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <signal.h>
 
+#include "motor_5.h"
 #include "jb_main_defs.h"
 
 
@@ -35,6 +36,7 @@ typedef struct setpoint_t {
 	double wheelAngle4;
 	double wheelAngle2;
 	double wheelAngle3;
+	double wheelAngle5; 
 	double x;	///< side-to-side position (m), global coords
 	double y;	///< front-and-back position (m), global coords
 	double z;	///< up-and-down, telescoping arm position (m), global coords
@@ -54,6 +56,7 @@ typedef struct core_state_t {
 	double d4_u;
 	double d2_u;
 	double d3_u;
+	double d5_u;
 	double vBatt;		///< battery voltage
 	double x;			///< global coordinates, x
 	double y;
@@ -67,6 +70,7 @@ typedef struct core_state_t {
 	uint64_t t_curr;	///< current time in ms
 	double v_xr_des;	///< desired x_r velocity, to be updated by trajec
 	double v_yr_des;	///< desired x_r velocity, to be updated by trajec
+	double v_z_des;
 } core_state_t;
 
 static void __print_usage(void);
@@ -86,8 +90,10 @@ static rc_filter_t D1 = RC_FILTER_INITIALIZER;
 static rc_filter_t D4 = RC_FILTER_INITIALIZER;
 static rc_filter_t D2 = RC_FILTER_INITIALIZER;
 static rc_filter_t D3 = RC_FILTER_INITIALIZER;
+static rc_filter_t D5 = RC_FILTER_INITIALIZER;
 static rc_mpu_data_t mpu_data;
 static FILE* fout = NULL;
+static FILE* fin = NULL;
 static uint64_t test_start; // record start time of trial
 static rc_matrix_t trajec_mat = RC_MATRIX_INITIALIZER;
 
@@ -174,11 +180,11 @@ int main(int argc, char *argv[]) {
 	}
 
 	// initialize motors
-	if (rc_motor_init() == -1) {
+	if (jb_rc_motor_init() == -1) {
 		fprintf(stderr, "ERROR: failed to initialize motors\n");
 		return -1;
 	}
-	rc_motor_standby(1); // start with motors in standby
+	jb_rc_motor_standby(1); // start with motors in standby
 
 	// initialize adc
 	if (rc_adc_init() == -1) {
@@ -205,7 +211,7 @@ int main(int argc, char *argv[]) {
 	rc_mpu_config_t mpu_config = rc_mpu_default_config();
 	mpu_config.dmp_sample_rate = SAMPLE_RATE_HZ;
 	mpu_config.orient = ORIENTATION_Z_UP;
-
+	
 	// if gyro isn't calibrated, run the calibration routine
 	if (!rc_mpu_is_gyro_calibrated()) {
 		printf("Gyro not calibrated, automatically starting calibration routine\n");
@@ -234,15 +240,21 @@ int main(int argc, char *argv[]) {
 		fprintf(stderr, "ERROR in jb_main, failed to make filter D3\n");
 		return -1;
 	}
+	if (rc_filter_pid(&D5, D5_KP, D5_KI, D5_KD, 4 * DT, DT)) {
+		fprintf(stderr, "ERROR in jb_main, failed to make filter D3\n");
+		return -1;
+	}
 
 	printf("Motor1 controller D1:\n");
 	rc_filter_print(D1);
-	printf("Motor2 controller D4:\n");
+	printf("Motor4 controller D4:\n");
 	rc_filter_print(D4);
 	printf("Motor2 controller D2:\n");
 	rc_filter_print(D2);
-	printf("Motor2 controller D3:\n");
+	printf("Motor3 controller D3:\n");
 	rc_filter_print(D3);
+	printf("Motor5 controller D3:\n");
+	rc_filter_print(D5);
 
 	// start a thread to slowly sample battery
 	if (adc_ok) {
@@ -280,19 +292,41 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 
+	// read in trajectory
+	fin = fopen(FILEIN, "r");
+	int rows;
+	fscanf(fin, "%*s %d", &rows);
 	// allocate memory then save trajectories to matrix	
 	trajec_mat = rc_matrix_empty();
-	if (rc_matrix_zeros(&trajec_mat, 4, 3)) {
+	if (rc_matrix_zeros(&trajec_mat, rows, 4)) {
 		fprintf(stderr, "ERROR: can't free memory for matrix");
 		return -1;
 	}
-	trajec_mat.d[0][0] = 0; // time 0
-	trajec_mat.d[0][1] = 0; // pos_x_r 0
-	trajec_mat.d[0][2] = 0; // pos_y_r 1
-	trajec_mat.d[1][0] = 3; // time 1
-	trajec_mat.d[1][1] = 13.12;
-	trajec_mat.d[1][2] = 0;
+	double pt; // storage variable for below
+	double pt2;
+	fscanf(fin, "%*s %*s %*s %*s"); // skip column headers
 
+	for (int i = 0; i < rows; ++i) {
+		// save trajectories to matrix
+		// & convert from m to radians
+		
+		fscanf(fin, "%lf", &(pt));
+		trajec_mat.d[i][0] = pt; // t
+		fscanf(fin, "%lf", &(pt));
+		fscanf(fin, "%lf", &(pt2));
+		trajec_mat.d[i][1] = (pt * cos(ANGLE_GLOBAL2OMNI) 
+			+ pt2 * sin(ANGLE_GLOBAL2OMNI))/WHEEL_RADIUS_XY; // x_r
+		trajec_mat.d[i][2] = (-pt * sin(ANGLE_GLOBAL2OMNI) 
+			+ pt2 * cos(ANGLE_GLOBAL2OMNI))/WHEEL_RADIUS_XY; // y_r
+		
+		fscanf(fin, "%lf", &(pt));
+		trajec_mat.d[i][3] = pt/WHEEL_RADIUS_Z; // z
+
+		if (trajec_mat.d[i][3]>(1/WHEEL_RADIUS_Z)) {
+			fprintf(stderr, "ERROR: Z height above 1 m limit");
+			return -1;
+		}
+	}
 
 	// declare time (ms)
 	cstate.t_1 = trajec_mat.d[0][0]; // assign first times
@@ -321,7 +355,8 @@ int main(int argc, char *argv[]) {
 	rc_filter_free(&D4);
 	rc_filter_free(&D2);
 	rc_filter_free(&D3);
-	rc_motor_cleanup();
+	rc_filter_free(&D5);
+	jb_rc_motor_cleanup();
 	rc_mpu_power_off();
 	rc_led_set(RC_LED_GREEN, 0);
 	rc_led_set(RC_LED_RED, 0);
@@ -340,98 +375,134 @@ static void __traject_new(void) {
 	// update current time, ms
 	cstate.t_curr = rc_nanos_since_boot() / 1000000;
 
+	// check if trajectory makes sense, more than just a start
+	if (trajec_mat.rows < 2) {
+		printf("ERROR: trajectory not filled");
+		__disarm_controller();
+	}
 
-		// check if trajectory makes sense, more than just a start
-		if (trajec_mat.rows < 2) {
-			printf("ERROR: trajectory not filled");
+	// desired state = step + 1
+	// current/prev state = step
+	if (cstate.step + 2 < trajec_mat.rows) {
+		// not yet aiming for final destination
+		// update desired destination and time if surpassed
+		if ((double)(cstate.t_curr - test_start) / 1000 >=
+			trajec_mat.d[cstate.step + 1][0]) {
+			++cstate.step;
+			cstate.t_1 = trajec_mat.d[cstate.step][0]; // previous time, s
+			cstate.t_2 = trajec_mat.d[cstate.step + 1][0]; // next time, s
+		}
+	}
+	else {
+		// aiming for final destination
+		if ((double)(cstate.t_curr - test_start) / 1000 >=
+			trajec_mat.d[cstate.step + 1][0]) {
 			__disarm_controller();
-		}
-
-		// desired state = step + 1
-		// current/prev state = step
-		if (cstate.step + 2 < trajec_mat.rows) {
-			// not yet aiming for final destination
-			// update desired destination and time if surpassed
-			if ((double)(cstate.t_curr - test_start) / 1000 >=
-				trajec_mat.d[cstate.step + 1][0]) {
-				++cstate.step;
-				cstate.t_1 = trajec_mat.d[cstate.step][0]; // previous time, s
-				cstate.t_2 = trajec_mat.d[cstate.step + 1][0]; // next time, s
-			}
-		}
-		else {
-			// aiming for final destination
-			if ((double)(cstate.t_curr - test_start) / 1000 >=
-				trajec_mat.d[cstate.step + 1][0]) {
-				__disarm_controller();
-				printf("Final destination reached. Thank you for choosing JerboBot Express.");
-				cstate.v_xr_des = 0;
-				cstate.v_yr_des = 0;
-				rc_set_state(EXITING);
-				return;
-			}
-		}
-
-		// check times make sense
-		if (cstate.t_1 > cstate.t_2) {
-			fprintf(stderr, "ERROR: can't travel backwards in time :(");
+			printf("Final destination reached. Thank you for choosing JerboBot Express.");
+			cstate.v_xr_des = 0;
+			cstate.v_yr_des = 0;
+			rc_set_state(EXITING);
 			return;
 		}
+	}
 
-		// time since beginning of current maneuver
-		double t_test = (double)(cstate.t_curr - test_start) / 1000
+	// check times make sense
+	if (cstate.t_1 > cstate.t_2) {
+		fprintf(stderr, "ERROR: can't travel backwards in time :(");
+		return;
+	}
+
+	// time since beginning of current maneuver
+	double t_test = (double)(cstate.t_curr - test_start) / 1000
 			- cstate.t_1;
 
-		double xr_diff = trajec_mat.d[cstate.step + 1][1] -
-			trajec_mat.d[cstate.step][1];
-		int xr_sign = (xr_diff > 0) - (xr_diff < 0);
-		double yr_diff = trajec_mat.d[cstate.step + 1][2] -
-			trajec_mat.d[cstate.step][2];
-		int yr_sign = (yr_diff > 0) - (yr_diff < 0);
-
-		// update differences to be magnitude only
-		xr_diff *= xr_sign;
-		yr_diff *= yr_sign;
-
-		// solutions for acceleration (and deacc) time for trapezoidal profile
-		double t_ax = ((cstate.t_2 - cstate.t_1 -
+	double xr_diff = trajec_mat.d[cstate.step + 1][1] -
+		trajec_mat.d[cstate.step][1];
+	int xr_sign = (xr_diff > 0) - (xr_diff < 0);
+	double yr_diff = trajec_mat.d[cstate.step + 1][2] -
+		trajec_mat.d[cstate.step][2];
+	int yr_sign = (yr_diff > 0) - (yr_diff < 0);
+	double z_diff = trajec_mat.d[cstate.step + 1][3] -
+		trajec_mat.d[cstate.step][3];
+	int z_sign = (z_diff > 0) - (z_diff < 0);
+		
+	// update differences to be magnitude only
+	xr_diff *= xr_sign;
+	yr_diff *= yr_sign;
+	z_diff *= z_sign;
+	// solutions for acceleration (and deacc) time for trapezoidal profile
+	double t_ax = ((cstate.t_2 - cstate.t_1 -
 			pow(pow((cstate.t_2 - cstate.t_1), 2) - 4 * xr_diff / ACCEL_MAX, .5)) / 2);
-		double t_ay = ((cstate.t_2 - cstate.t_1 -
+	double t_ay = ((cstate.t_2 - cstate.t_1 -
 			pow(pow((cstate.t_2 - cstate.t_1), 2) - 4 * yr_diff / ACCEL_MAX, .5)) / 2);
 
-		// assign desired x_r velocity based on trapezoidal profile
-		if (t_test <= t_ax) {
-			// accelerating, trapezoid left
-			cstate.v_xr_des = xr_sign * ACCEL_MAX * t_test;
+	// assign desired x_r velocity based on trapezoidal profile
+	if (t_test <= t_ax) {
+		// accelerating, trapezoid left
+		cstate.v_xr_des = xr_sign * ACCEL_MAX * t_test;
+	}
+	else if (t_test >= cstate.t_2 - cstate.t_1 - t_ax) {
+		// decelerating, trapezoid right
+		cstate.v_xr_des = xr_sign * ACCEL_MAX *
+			(cstate.t_2 - cstate.t_1 - t_test);
+	}
+	else {
+		// constant velocity, trapezoid plateau
+		cstate.v_xr_des = xr_sign * ACCEL_MAX * t_ax;
+	}
+
+	// similarly, for y_r
+	if (t_test <= t_ay) {
+		cstate.v_yr_des = yr_sign * ACCEL_MAX * t_test;
+	}
+	else if (t_test >= cstate.t_2 - cstate.t_1 - t_ay) {
+		cstate.v_yr_des = yr_sign * ACCEL_MAX *
+			(cstate.t_2 - cstate.t_1 - t_test);
+	}
+	else {
+		cstate.v_yr_des = yr_sign * ACCEL_MAX * t_ay;
+	}
+
+	// z actuation depends on direction due to weight of arm
+	if (z_sign > 0) {
+		// driving upwards
+		double t_az = ((cstate.t_2 - cstate.t_1 -
+			pow(pow((cstate.t_2 - cstate.t_1), 2) - 4 * z_diff / ACCEL_Z_U, .5)) / 2);
+		
+		if (t_test <= t_az) {
+			cstate.v_z_des = z_sign * ACCEL_Z_U * t_test;
 		}
-		else if (t_test >= cstate.t_2 - cstate.t_1 - t_ax) {
-			// decelerating, trapezoid right
-			cstate.v_xr_des = xr_sign * ACCEL_MAX *
+		else if (t_test >= cstate.t_2 - cstate.t_1 - t_az) {
+			cstate.v_z_des = z_sign * ACCEL_Z_U *
 				(cstate.t_2 - cstate.t_1 - t_test);
 		}
 		else {
-			// constant velocity, trapezoid plateau
-			cstate.v_xr_des = xr_sign * ACCEL_MAX * t_ax;
+			cstate.v_z_des = z_sign * ACCEL_Z_U * t_az;
 		}
-
-		// similarly, for y_r
-		if (t_test <= t_ay) {
-			cstate.v_yr_des = yr_sign * ACCEL_MAX * t_test;
+	}
+	else {
+		// driving downwards
+		double t_az = ((cstate.t_2 - cstate.t_1 -
+			pow(pow((cstate.t_2 - cstate.t_1), 2) - 4 * z_diff / ACCEL_Z_D, .5)) / 2);
+		
+		if (t_test <= t_az) {
+			cstate.v_z_des = - ACCEL_Z_D * t_test;
 		}
-		else if (t_test >= cstate.t_2 - cstate.t_1 - t_ay) {
-			cstate.v_yr_des = yr_sign * ACCEL_MAX *
+		else if (t_test >= cstate.t_2 - cstate.t_1 - t_az) {
+			cstate.v_z_des = - ACCEL_Z_D *
 				(cstate.t_2 - cstate.t_1 - t_test);
 		}
 		else {
-			cstate.v_yr_des = yr_sign * ACCEL_MAX * t_ay;
+			cstate.v_z_des = - ACCEL_Z_D * t_az;
 		}
+	}
 
-		// update desired state
-		setpoint.wheelAngle1 += (cstate.v_xr_des * DT); // /wheel_radius_xy
-		setpoint.wheelAngle4 += (cstate.v_xr_des * DT);
-		setpoint.wheelAngle2 += (cstate.v_yr_des * DT);
-		setpoint.wheelAngle3 += (cstate.v_yr_des * DT);
-
+	// update desired state
+	setpoint.wheelAngle1 += (cstate.v_xr_des * DT); // /wheel_radius_xy
+	setpoint.wheelAngle4 += (cstate.v_xr_des * DT);
+	setpoint.wheelAngle2 += (cstate.v_yr_des * DT);
+	setpoint.wheelAngle3 += (cstate.v_yr_des * DT);
+	setpoint.wheelAngle5 += (cstate.v_z_des * DT);
 }
 
 /**
@@ -441,8 +512,7 @@ static void __traject_new(void) {
 static void __position_controller(void)
 {
 	static int inner_saturation_counter = 0;
-	double duty1, duty4, duty2, duty3;
-	//double duty5;
+	double duty1, duty4, duty2, duty3, duty5;
 
 	// if we got here the state is RUNNING, but controller is not
 	// necessarily armed. If DISARMED, wait for the user to pick MIP up
@@ -466,7 +536,7 @@ static void __position_controller(void)
 	double wheel4_old = cstate.wheelAngle4;
 	double wheel2_old = cstate.wheelAngle2;
 	double wheel3_old = cstate.wheelAngle3;
-	//double wheel5_old = cstate.wheelAngle5;
+	double wheel5_old = cstate.wheelAngle5;
 
 	cstate.wheelAngle1 = (rc_encoder_read(ENCODER_CHANNEL_1) * 2.0 * M_PI) \
 		/ (ENCODER_POLARITY_1 * GEARBOX_XY * ENCODER_RES);
@@ -476,9 +546,10 @@ static void __position_controller(void)
 		/ (ENCODER_POLARITY_3 * GEARBOX_XY * ENCODER_RES);
 	cstate.wheelAngle4 = (rc_encoder_read(ENCODER_CHANNEL_4) * 2.0 * M_PI) \
 		/ (ENCODER_POLARITY_4 * GEARBOX_XY * ENCODER_RES);
-	/*cstate.wheelAngle5 = (rc_encoder_read(ENCODER_CHANNEL_5) * 2.0 * M_PI) \
+	cstate.wheelAngle5 = 0;
+	//(rc_encoder_read(ENCODER_CHANNEL_5) * 2.0 * M_PI) \
 		/ (ENCODER_POLARITY_5 * GEARBOX_Z * ENCODER_RES);
-	*/
+	
 
 	if (rc_mpu_read_accel(&mpu_data) < 0) {
 		printf("read accel data failed\n");
@@ -486,14 +557,13 @@ static void __position_controller(void)
 	if (rc_mpu_read_gyro(&mpu_data) < 0) {
 		printf("read gyro data failed\n");
 	}
-	// TO DO: read magnetometer?
 
 	// find change in encoder position
 	double dAngle1 = cstate.wheelAngle1 - wheel1_old;
 	double dAngle4 = cstate.wheelAngle4 - wheel4_old;
 	double dAngle2 = cstate.wheelAngle2 - wheel2_old;
 	double dAngle3 = cstate.wheelAngle3 - wheel3_old;
-	//double dYaw = cstate.wheelAngle5 - wheel5_old;
+	double dAngle5 = cstate.wheelAngle5 - wheel5_old;
 
 	// change in position along resultant omni axes
 	double dX_r = 0.5 * WHEEL_RADIUS_XY * (dAngle1 + dAngle4);
@@ -511,6 +581,7 @@ static void __position_controller(void)
 		- dY_r * sin(ANGLE_GLOBAL2OMNI + cstate.theta);
 	cstate.y += dX_r * sin(ANGLE_GLOBAL2OMNI + cstate.theta)
 		+ dY_r * cos(ANGLE_GLOBAL2OMNI + cstate.theta);
+	cstate.z += WHEEL_RADIUS_Z * (dAngle5);
 
 	// correct for full rotation
 	if (cstate.theta > 2 * M_PI) {
@@ -519,7 +590,6 @@ static void __position_controller(void)
 	else if (cstate.theta < -2 * M_PI) {
 		cstate.theta = cstate.theta + 2 * M_PI;
 	}
-	//cstate.z += cstate.wheelAngle5 * WHEEL_RADIUS_Z;
 
 	/*************************************************************
 	* check for various exit conditions AFTER state estimate
@@ -549,6 +619,7 @@ static void __position_controller(void)
 	D2.gain = D2_GAIN * V_NOMINAL / cstate.vBatt;
 	D3.gain = D3_GAIN * V_NOMINAL / cstate.vBatt;
 	D4.gain = D4_GAIN * V_NOMINAL / cstate.vBatt;
+	D5.gain = D5_GAIN * V_NOMINAL / cstate.vBatt;
 	cstate.d1_u = rc_filter_march(&D1, setpoint.wheelAngle1
 		- cstate.wheelAngle1);
 	cstate.d4_u = rc_filter_march(&D4, setpoint.wheelAngle4
@@ -557,7 +628,8 @@ static void __position_controller(void)
 		- cstate.wheelAngle2);
 	cstate.d3_u = rc_filter_march(&D3, setpoint.wheelAngle3
 		- cstate.wheelAngle3);
-
+	cstate.d5_u = rc_filter_march(&D5, setpoint.wheelAngle5
+		- cstate.wheelAngle5);
 
 	/*************************************************************
 	* Check if the inner loop saturated. If it saturates for over
@@ -583,10 +655,12 @@ static void __position_controller(void)
 	duty4 = cstate.d4_u;
 	duty2 = cstate.d2_u;
 	duty3 = cstate.d3_u;
-	rc_motor_set(MOTOR_CHANNEL_1, MOTOR_POLARITY_1 * duty1);
-	rc_motor_set(MOTOR_CHANNEL_4, MOTOR_POLARITY_4 * duty4);
-	rc_motor_set(MOTOR_CHANNEL_2, MOTOR_POLARITY_2 * duty2);
-	rc_motor_set(MOTOR_CHANNEL_3, MOTOR_POLARITY_3 * duty3);
+	duty5 = cstate.d5_u;
+	jb_rc_motor_set(MOTOR_CHANNEL_1, MOTOR_POLARITY_1 * duty1);
+	jb_rc_motor_set(MOTOR_CHANNEL_4, MOTOR_POLARITY_4 * duty4);
+	jb_rc_motor_set(MOTOR_CHANNEL_2, MOTOR_POLARITY_2 * duty2);
+	jb_rc_motor_set(MOTOR_CHANNEL_3, MOTOR_POLARITY_3 * duty3);
+	jb_rc_motor_set(MOTOR_CHANNEL_5, MOTOR_POLARITY_5 * duty5);
 
 	return;
 }
@@ -602,11 +676,12 @@ static int __zero_out_controller(void)
 	rc_filter_reset(&D4);
 	rc_filter_reset(&D2);
 	rc_filter_reset(&D3);
+	rc_filter_reset(&D5);
 	//setpoint.wheelAngle1 = 0.0;
 	//setpoint.phi = 0.0;
 	//setpoint.gamma = 0.0;
-	rc_motor_set(0, 0.0);
-	rc_motor_set(4,0.0); // 0 has a bug, doesn't include motor4
+	jb_rc_motor_set(0, 0.0);
+	jb_rc_motor_set(4,0.0); // 0 has a bug, doesn't include motor4
 	//rc_motor_set(5,0.0);
 	return 0;
 }
@@ -618,8 +693,8 @@ static int __zero_out_controller(void)
  */
 static int __disarm_controller(void)
 {
-	rc_motor_standby(1);
-	rc_motor_free_spin(0);
+	jb_rc_motor_standby(1);
+	jb_rc_motor_free_spin(0);
 	setpoint.arm_state = DISARMED;
 	return 0;
 }
@@ -636,8 +711,9 @@ static int __arm_controller(void)
 	rc_encoder_write(ENCODER_CHANNEL_4, 0);
 	rc_encoder_write(ENCODER_CHANNEL_2, 0);
 	rc_encoder_write(ENCODER_CHANNEL_3, 0);
+	rc_encoder_write(ENCODER_CHANNEL_5, 0);
 	// prefill_filter_inputs(&D1,cstate.theta);
-	rc_motor_standby(0);
+	jb_rc_motor_standby(0);
 	setpoint.arm_state = ARMED;
 	return 0;
 }
@@ -695,8 +771,8 @@ static void* __print_loop(__attribute__((unused)) void* ptr)
 		if (new_rc_state == RUNNING && setpoint.arm_state==ARMED) {
 			double x_r = cstate.x * cos(ANGLE_GLOBAL2OMNI + cstate.theta)
 				+ cstate.y * sin(ANGLE_GLOBAL2OMNI + cstate.theta);
-			double y_r = -cstate.x * cos(ANGLE_GLOBAL2OMNI + cstate.theta)
-				+ cstate.y * sin(ANGLE_GLOBAL2OMNI + cstate.theta);
+			double y_r = -cstate.x * sin(ANGLE_GLOBAL2OMNI + cstate.theta)
+				+ cstate.y * cos(ANGLE_GLOBAL2OMNI + cstate.theta);
 
 			fprintf(fout, "\r");
 			fprintf(fout, "%7.3f  ", (double)(cstate.t_curr - test_start) / 1000);

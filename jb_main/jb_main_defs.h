@@ -7,6 +7,8 @@
 #ifndef RC_BALANCE_CONFIG
 #define RC_BALANCE_CONFIG
 
+#define FILEIN			"trajectory.txt" // update this depending on input filename
+
  // Structural properties of JerboBot
 #define GEARBOX_XY			26.851
 #define GEARBOX_Z		5.182
@@ -16,9 +18,10 @@
 #define TRACK_WIDTH		0.52 // update to distance between omni wheels
 #define V_NOMINAL		11.1
 #define ANGLE_GLOBAL2OMNI M_PI/4
-#define ACCEL_MAX			10 	// m/s2 acceleration, rad/s2 for this test
+#define ACCEL_MAX			25 	// m/s2 acceleration, rad/s2 for this test
 							// ^^^ was 10 for earlier, testing limits
-#define Z_ACCEL_MAX			
+#define ACCEL_Z_U			30
+#define ACCEL_Z_D			30
 
 // inner test loop controller, 100 hz?
 #define D1_KP				10
@@ -38,7 +41,10 @@
 #define D3_KI				0
 #define D3_KD				0
 #define D3_GAIN				0.5
-
+#define D5_KP				10
+#define D5_KI				0
+#define D5_KD				0
+#define D5_GAIN				0.5
 
 // electrical hookups
 // (recall motors1&4 = x_r, 2&3 = y_r)
@@ -56,18 +62,12 @@
 #define ENCODER_CHANNEL_2	3
 #define ENCODER_CHANNEL_3	4
 #define ENCODER_CHANNEL_4	2
-//#define ENCODER_CHANNEL_5
+#define ENCODER_CHANNEL_5	5
 #define ENCODER_POLARITY_1	-1
 #define ENCODER_POLARITY_2	-1
 #define ENCODER_POLARITY_3	1
 #define ENCODER_POLARITY_4	1
-//#define ENCODER_POLARITY_5	-1
-
-//	drive speeds when using remote control (dsm2)
-#define DRIVE_RATE_NOVICE	16
-#define TURN_RATE_NOVICE	6
-#define DRIVE_RATE_ADVANCED	26
-#define TURN_RATE_ADVANCED	10
+#define ENCODER_POLARITY_5	1
 
 // DSM channel config
 #define DSM_DRIVE_POL		1
