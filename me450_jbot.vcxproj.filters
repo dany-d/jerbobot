@@ -300,6 +300,9 @@
     <ClCompile Include="tests\jb_test_RC_interrupt\jb_test_RC_interrupt.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests\jb_test_5th_driver\jb_test_5th_hbridge.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="pru_firmware\src\pru0-encoder.asm">

@@ -1,10 +1,12 @@
 /**
 * JerboBot Main Test
 * Taylor Sun (taysun@umich.edu)
-* Last updated: 4/13/19
+* Dan Yuan (djdany@umich.edu)
+* Last updated: 4/23/19
 *
 * Based on input trajectory file, operate
-* Jerbobot
+* Jerbobot. Controls solution is currently
+* based on pure P-control with encoder input.
 */
 
 #include <stdio.h>
@@ -32,7 +34,7 @@ typedef enum arm_state_t {
 */
 typedef struct setpoint_t {
 	arm_state_t arm_state;	///< see arm_state_t declaration
-	double wheelAngle1; // TEMP, for double motor test ONLY
+	double wheelAngle1; ///< see numbering convention in user manual
 	double wheelAngle4;
 	double wheelAngle2;
 	double wheelAngle3;
@@ -148,24 +150,6 @@ int main(int argc, char *argv[]) {
 		fprintf(stderr, "ERROR: failed to start signal handler\n");
 		return -1;
 	}
-
-	// initialize buttons
-	/*
-	if (rc_button_init(RC_BTN_PIN_PAUSE, RC_BTN_POLARITY_NORM_HIGH,
-		RC_BTN_DEBOUNCE_DEFAULT_US)) {
-		fprintf(stderr, "ERROR: failed to initialize pause button\n");
-		return -1;
-	}
-	if (rc_button_init(RC_BTN_PIN_MODE, RC_BTN_POLARITY_NORM_HIGH,
-		RC_BTN_DEBOUNCE_DEFAULT_US)) {
-		fprintf(stderr, "ERROR: failed to initialize mode button\n");
-		return -1;
-	}
-
-	// Assign functions to be called when button events occur
-	rc_button_set_callbacks(RC_BTN_PIN_PAUSE, __on_pause_press, NULL);
-	rc_button_set_callbacks(RC_BTN_PIN_MODE, NULL, __on_mode_release);
-	*/
 
 	// initialize DSM
 	if (rc_dsm_init() == -1) {
@@ -546,6 +530,10 @@ static void __position_controller(void)
 		/ (ENCODER_POLARITY_3 * GEARBOX_XY * ENCODER_RES);
 	cstate.wheelAngle4 = (rc_encoder_read(ENCODER_CHANNEL_4) * 2.0 * M_PI) \
 		/ (ENCODER_POLARITY_4 * GEARBOX_XY * ENCODER_RES);
+	
+	/*
+	* INPUT YOUR EXTERNALLY READ ENCODER COUNTS HERE vvv
+	*/
 	cstate.wheelAngle5 = 0;
 	//(rc_encoder_read(ENCODER_CHANNEL_5) * 2.0 * M_PI) \
 		/ (ENCODER_POLARITY_5 * GEARBOX_Z * ENCODER_RES);
@@ -591,25 +579,6 @@ static void __position_controller(void)
 		cstate.theta = cstate.theta + 2 * M_PI;
 	}
 
-	/*************************************************************
-	* check for various exit conditions AFTER state estimate
-	***************************************************************/
-	/*
-	if (rc_get_state() == EXITING) {
-		rc_motor_set(0, 0.0);
-		return;
-	}
-	// if controller is still ARMED while state is PAUSED, disarm it
-	if (rc_get_state() != RUNNING && setpoint.arm_state == ARMED) {
-		__disarm_controller();
-		return;
-	}
-	// exit if the controller is disarmed
-	if (setpoint.arm_state == DISARMED) {
-		return;
-	}
-	*/
-
 	/************************************************************
 	* INNER LOOP ANGLE Theta controller D1
 	* Input to D1 is theta error (setpoint-state). Then scale the
@@ -635,6 +604,7 @@ static void __position_controller(void)
 	* Check if the inner loop saturated. If it saturates for over
 	* a second disarm the controller to prevent stalling motors.
 	*************************************************************/
+
 	if (fabs(cstate.d1_u) > 0.95) inner_saturation_counter++;
 	else inner_saturation_counter = 0;
 	// if saturate for a second, disarm for safety
@@ -678,11 +648,9 @@ static int __zero_out_controller(void)
 	rc_filter_reset(&D3);
 	rc_filter_reset(&D5);
 	//setpoint.wheelAngle1 = 0.0;
-	//setpoint.phi = 0.0;
-	//setpoint.gamma = 0.0;
 	jb_rc_motor_set(0, 0.0);
-	jb_rc_motor_set(4,0.0); // 0 has a bug, doesn't include motor4
-	//rc_motor_set(5,0.0);
+	jb_rc_motor_set(4,0.0); // 0 has a bug, doesn't include motor4&5
+	jb_rc_motor_set(5,0.0);
 	return 0;
 }
 
