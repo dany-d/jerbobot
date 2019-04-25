@@ -1,0 +1,31 @@
+% script to evaluate 
+% trajectory for jerbobot
+
+a_max = 50; %specified max acceleration, slope of trapezoid sides 
+
+% feel free to adjust below to array for larger data sets
+% pt1
+t_1 = 0;  % start time
+x_1 = 0; % start x (global)
+y_1 = 0; % start y (global)
+%pt2, next step
+t_2 = 5;  
+x_2 = 5;  
+y_2 = 5; 
+
+% convert 
+xr_1 = x_1 * cos(pi/4) + y_1 * sin(pi/4);
+yr_1 = -x_1 * sin(pi/4) + y_1 * cos(pi/4);
+xr_2 = x_2 * cos(pi/4) + y_2 * sin(pi/4);
+yr_2 = -x_2 * sin(pi/4) + y_2 * cos(pi/4);
+
+DT = t_2-t_1;
+DX = abs(x_r-x_1); 
+
+% polynominal for acceleration time (time duration of 
+% symmetrical trapezoid sides)
+t_p = [1 -DT DX/a_max];
+t_a = roots(t_p) % output, take smallest value
+% if complex roots, impossible route
+
+
